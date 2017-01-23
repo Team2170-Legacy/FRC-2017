@@ -13,6 +13,7 @@
 #define DRIVE_TRAIN_H
 #include "Commands/Subsystem.h"
 #include "../ProfileData.h"
+#include "../MaxSonarEZ1.h"
 #include "WPILib.h"
 #include <cmath>
 
@@ -54,6 +55,12 @@ private:
 
 	CANTalon::MotionProfileStatus LeftStatus;
 	CANTalon::MotionProfileStatus RightStatus;
+
+
+	// Temporary hacks until final sensors done
+	std::shared_ptr<AnalogGyro> gyro;
+	std::shared_ptr<MaxSonarEZ1> FrontSonar;
+
 
 	// It's desirable that everything possible is private except
 	// for methods that implement subsystem capabilities
