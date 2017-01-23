@@ -49,8 +49,6 @@ private:
 	void SetRampRate(double ramp);
 	void SetMotorGains();
 
-	float accel_angle_x;
-	float accel_angle_y;
 	float chassis_pitch = 0.0;
 
 	CANTalon::MotionProfileStatus LeftStatus;
