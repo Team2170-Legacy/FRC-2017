@@ -25,11 +25,15 @@ TeleopDrive::TeleopDrive(): Command() {
 
 // Called just before this Command runs the first time
 void TeleopDrive::Initialize() {
-
+	m_DriverJoystick = Robot::oi->getDriverJoystick();
 }
 
 // Called repeatedly when this Command is scheduled to run
 void TeleopDrive::Execute() {
+	double left = m_DriverJoystick->GetRawAxis(1);
+	double right = m_DriverJoystick->GetRawAxis(5);
+
+	Robot::driveTrain->TankDrive(left, right);
 
 }
 
