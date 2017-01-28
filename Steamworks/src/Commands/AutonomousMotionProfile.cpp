@@ -29,7 +29,7 @@ AutonomousMotionProfile::AutonomousMotionProfile(): Command(),
 // Called just before this Command runs the first time
 void AutonomousMotionProfile::Initialize() {
 	Robot::driveTrain->SetChassisMode(CANTalon::ControlMode::kMotionProfile);
-
+	printf("initialize\n");
 	if (bResetGyro) {
 		Robot::driveTrain->ResetChassisYaw();
 	}
