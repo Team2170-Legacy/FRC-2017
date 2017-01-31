@@ -80,6 +80,7 @@ void Robot::TeleopPeriodic() {
 	if (!GearPipeline.GetFindContoursOutput()->empty())
 	{
 		r = cv::boundingRect(GearPipeline.GetFindContoursOutput()[0]);
+		printf("%d\t%d\n", r.height, r.width);
 	}
 	//Results = GearPipeline.getfilterContoursOutput();
 	Scheduler::GetInstance()->Run();
