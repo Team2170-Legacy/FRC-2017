@@ -26,7 +26,7 @@
  */
 class DriveTrain: public Subsystem {
 private:
-	const unsigned short int kCountsPerRev = 360;	// 360 count encoder, x4 sampling
+	const unsigned short int kCountsPerRev;	// 360 count encoder, x4 sampling
 	const double kDefaultVoltageRamp;
 	float mAutoVelocity = 0.5;
 	float mYawGain = -0.10;
@@ -101,7 +101,7 @@ public:
 
 	double ReadPositionError();
 
-	const double InchesPerRotation = 8.0 * 3.14159265;
+	const double InchesPerRotation;
 
 	void setAutoVelocity(float autoVelocity = 0.5) {
 		mAutoVelocity = autoVelocity;
