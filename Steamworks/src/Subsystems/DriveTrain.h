@@ -15,6 +15,7 @@
 #include "../ProfileData.h"
 #include "../MaxSonarEZ1.h"
 #include "WPILib.h"
+#include "AHRS.h"
 #include <cmath>
 
 #define DEADBAND(val, limit)	((fabs(val) < limit) ? 0.0 : val)
@@ -56,8 +57,8 @@ private:
 
 
 	// Temporary hacks until final sensors done
-	std::shared_ptr<AnalogGyro> gyro;
 	std::shared_ptr<MaxSonarEZ1> FrontSonar;
+	std::shared_ptr<AHRS> gyro;
 
 
 	// It's desirable that everything possible is private except
