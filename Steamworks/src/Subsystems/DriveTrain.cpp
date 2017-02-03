@@ -388,7 +388,7 @@ void DriveTrain::InitTalons(void) {
 	cANTalonRight->SetFeedbackDevice(CANTalon::QuadEncoder);
 	cANTalonRight->ConfigEncoderCodesPerRev(kCountsPerRev);
 
-	cANTalonLeft->SetSensorDirection(prefs->GetBoolean("SensorDirection", true));
+	cANTalonLeft->SetSensorDirection(prefs->GetBoolean("SensorDirection", false)); //changed this
 	cANTalonRight->SetSensorDirection(prefs->GetBoolean("SensorDirection", true));
 
 	SetMotorGains();
