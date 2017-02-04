@@ -18,6 +18,8 @@
 #include "Commands/AutonomousTestGroup.h"
 #include "Commands/BackDoorClose.h"
 #include "Commands/BackDoorOpen.h"
+#include "Commands/ClimberDown.h"
+#include "Commands/ClimberUp.h"
 #include "Commands/ElevatorPosition.h"
 #include "Commands/IntakeOff.h"
 #include "Commands/IntakeOn.h"
