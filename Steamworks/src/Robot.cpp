@@ -27,7 +27,12 @@ void Robot::VisionThread() {
 	cv::Mat output;
 	while(true) {
 		cvSink.GrabFrame(source);
-		cvtColor(source, output, cv::COLOR_BGR2GRAY);
+		cvtColor(source, output, cv::COLOR_BGR2RGB);
+		cv::Point r1tl = cv::Point(100, 100);
+		cv::Point r1br = cv::Point(400, 400);
+		cv::Scalar color = cv::Scalar(180,105,255); // BGR for hot pink color
+		cv::rectangle(output, r1tl, r1br, color, 4, 8, 0);
+		//cv::rectangle(source, r2.tl(), r2.br(), color, 1, 8, 0);
 		outputStreamStd.PutFrame(output);
 	}
 };
