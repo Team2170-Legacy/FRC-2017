@@ -20,6 +20,7 @@
 #include "Commands/BackDoorOpen.h"
 #include "Commands/ClimberDown.h"
 #include "Commands/ClimberUp.h"
+#include "Commands/ElevatorHome.h"
 #include "Commands/ElevatorPosition.h"
 #include "Commands/IntakeOff.h"
 #include "Commands/IntakeOn.h"
@@ -35,6 +36,7 @@ OI::OI() {
     
 
     // SmartDashboard Buttons
+    SmartDashboard::PutData("Elevator Home", new ElevatorHome());
     SmartDashboard::PutData("Autonomous Test Group", new AutonomousTestGroup());
     SmartDashboard::PutData("Autonomous Command", new AutonomousCommand());
 
