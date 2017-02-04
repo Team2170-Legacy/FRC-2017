@@ -58,11 +58,17 @@ void DriveTrain::ArcadeDriveWithJoysticks(float moveVal, float rotateVal) {
 }
 
 void DriveTrain::ResetChassisYaw() {
-	gyro->Reset();
+	if (gyro->IsConnected()) {
+		gyro->Reset();
+	}
 }
 
 float DriveTrain::ReadChassisYaw() {
-	return gyro->GetAngle();
+	double result = 0.0;
+	if (gyro->IsConnected()) {
+		result = gyro->GetAngle();
+	}
+	return result;
 }
 
 void DriveTrain::DriveStraight(bool Backwards) {
