@@ -40,6 +40,7 @@ public:
 	void InitDefaultCommand();
 	void SetIntakeSpeed(double speed);
 	void SetBackDoorPosition(double position);
+	void SetClimberSpeed(double speed);
 
 	const double kDoorOpenPosition=1.0;
 	const double kDoorClosePosition=0.0;
