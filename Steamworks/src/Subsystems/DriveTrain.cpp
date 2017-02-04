@@ -412,7 +412,10 @@ double DriveTrain::GetChassisPosition() {
 }
 
 void DriveTrain::TankDrive(float Left, float Right) {
-		robotDrive->TankDrive(Left, Right, true);
+		SetVelocityMode();
+//		robotDrive->TankDrive(Left*60, Right*60, true);
+		cANTalonLeft->Set(Left * 60 * 5);
+		cANTalonRight->Set(-Right * 60 * 5);
 	    cANTalonSlaveRight->Set(2);
 	    cANTalonSlaveLeft->Set(1);
 }
