@@ -131,7 +131,7 @@ void DriveTrain::TankDriveWithTriggers(float Left, float Right, float Trigger) {
  	}
  	else {
  		bDriveStraight = false;
- 		robotDrive->TankDrive(newLeft, newLeft, true);
+ 		robotDrive->TankDrive(newLeft, newRight, true);
  	}
     cANTalonSlaveRight->Set(2);
     cANTalonSlaveLeft->Set(1);

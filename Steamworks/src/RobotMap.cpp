@@ -44,8 +44,8 @@ void RobotMap::init() {
         driveTrainRobotDrive->SetExpiration(0.1);
         driveTrainRobotDrive->SetSensitivity(0.5);
         driveTrainRobotDrive->SetMaxOutput(1.0);
-        driveTrainRobotDrive->SetInvertedMotor(RobotDrive::kRearLeftMotor, true);
-        driveTrainRobotDrive->SetInvertedMotor(RobotDrive::kRearRightMotor, true);
+        driveTrainRobotDrive->SetInvertedMotor(RobotDrive::kRearLeftMotor, false);
+        driveTrainRobotDrive->SetInvertedMotor(RobotDrive::kRearRightMotor, false);
     driveTrainCANTalonSlaveLeft.reset(new CANTalon(3));
     lw->AddActuator("Drive Train", "CAN Talon Slave Left", driveTrainCANTalonSlaveLeft);
     
