@@ -30,6 +30,7 @@ void IntakeOff::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void IntakeOff::Execute() {
+	Robot::payload->SetIntakeSpeed(Robot::payload->kIntakeOffSpeed);
 
 }
 
