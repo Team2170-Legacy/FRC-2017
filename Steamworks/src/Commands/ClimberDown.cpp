@@ -27,7 +27,8 @@ void ClimberDown::Initialize() {
 }
 
 // Called repeatedly when this Command is scheduled to run
-void ClimberDown::Execute() {
+void ClimberDown::Execute() {\
+	Robot::payload->SetClimberSpeed(Robot::payload->kClimberDownSpeed);
 
 }
 
@@ -38,11 +39,11 @@ bool ClimberDown::IsFinished() {
 
 // Called once after isFinished returns true
 void ClimberDown::End() {
-
+	Robot::payload->SetClimberSpeed(Robot::payload->kClimberStopSpeed);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void ClimberDown::Interrupted() {
-
+	End();
 }

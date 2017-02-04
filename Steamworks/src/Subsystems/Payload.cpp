@@ -46,6 +46,11 @@ void Payload::SetIntakeSpeed(double speed) {
 void Payload::SetBackDoorPosition(double position) {
 	doorServo->Set(position);
 }
+
+
+void Payload::SetClimberSpeed(double speed) {
+	speedControllerClimber->Set(speed);
+}
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 
