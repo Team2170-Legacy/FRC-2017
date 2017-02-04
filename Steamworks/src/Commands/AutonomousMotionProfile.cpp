@@ -40,7 +40,6 @@ void AutonomousMotionProfile::Initialize() {
 	else {
 		Robot::driveTrain->FillProfileBuffer(mLeftWheel);
 	}
-
 	talonService.StartPeriodic(0.005);
 }
 
