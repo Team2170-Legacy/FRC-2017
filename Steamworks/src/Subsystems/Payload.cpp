@@ -47,6 +47,22 @@ void Payload::SetIntakeSpeed(double speed) {
 void Payload::SetBackDoorPosition(double position) {
 	doorServo->Set(position);
 }
+
+
+
+void Payload::SetClimberSpeed(double speed) {
+	speedControllerClimber->Set(speed);
+}
+
+
+void Payload::InitPayload() {
+	cANTalonElevator->SetFeedbackDevice(CANTalon::QuadEncoder);
+	cANTalonElevator->ConfigEncoderCodesPerRev(kElevatorCountsPerRev);
+	cANTalonElevator->SetSensorDirection(true);
+	cANTalonElevator->SetControlMode(CANTalon::ControlMode::kVoltage);
+	cANTalonElevator->Set(0);
+
+}
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 
