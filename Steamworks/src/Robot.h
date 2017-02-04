@@ -27,12 +27,15 @@
 #include "OI.h"
 
 class Robot : public IterativeRobot {
+private:
+	static void VisionThread();
+
 public:
 	std::unique_ptr<Command> autonomousCommand;
 	static std::unique_ptr<OI> oi;
 	LiveWindow *lw = LiveWindow::GetInstance();
 
-	cs::CvSink GearCameraSink;
+	//cs::CvSink GearCameraSink;
 
 	grip::GearTargetPipeline GearPipeline;
 
