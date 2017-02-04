@@ -52,6 +52,7 @@ void Payload::SetClimberSpeed(double speed) {
 	speedControllerClimber->Set(speed);
 }
 
+
 void Payload::InitPayload() {
 	cANTalonElevator->SetFeedbackDevice(CANTalon::QuadEncoder);
 	cANTalonElevator->ConfigEncoderCodesPerRev(kElevatorCountsPerRev);
