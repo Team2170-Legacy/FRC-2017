@@ -30,7 +30,7 @@ void IntakeOn::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void IntakeOn::Execute() {
-	Robot::payload->SetIntakeSpeed(Robot::payload->kIntakeOnSpeed);
+	Robot::payload->SetIntakeSpeed(Payload::IntakeSpeed::kIntakeIn);
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -40,11 +40,9 @@ bool IntakeOn::IsFinished() {
 
 // Called once after isFinished returns true
 void IntakeOn::End() {
-
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void IntakeOn::Interrupted() {
-
 }
