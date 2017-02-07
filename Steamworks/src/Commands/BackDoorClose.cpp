@@ -30,7 +30,7 @@ void BackDoorClose::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void BackDoorClose::Execute() {
-	Robot::payload->SetBackDoorPosition(Robot::payload->kDoorClosePosition);
+	Robot::payload->SetBackDoorPosition(Payload::DoorPosition::kDoorClosed);
 
 }
 
