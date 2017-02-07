@@ -8,9 +8,16 @@ GearTwo::GearTwo() {
 * Runs an iteration of the pipeline and updates outputs.
 */
 void GearTwo::Process(cv::Mat& source0){
+	//Step Resize_Image0:
+	//input
+	cv::Mat resizeImageInput = source0;
+	double resizeImageWidth = 320.0;  // default Double
+	double resizeImageHeight = 240.0;  // default Double
+	int resizeImageInterpolation = cv::INTER_CUBIC;
+	resizeImage(resizeImageInput, resizeImageWidth, resizeImageHeight, resizeImageInterpolation, this->resizeImageOutput);
 	//Step HSL_Threshold0:
 	//input
-	cv::Mat hslThresholdInput = source0;
+	cv::Mat hslThresholdInput = resizeImageOutput;
 	double hslThresholdHue[] = {29.136690647482013, 99.11262017468137};
 	double hslThresholdSaturation[] = {0.0, 255.0};
 	double hslThresholdLuminance[] = {202.99353074841233, 254.66619845073728};
@@ -23,20 +30,27 @@ void GearTwo::Process(cv::Mat& source0){
 	//Step Filter_Contours0:
 	//input
 	std::vector<std::vector<cv::Point> > filterContoursContours = findContoursOutput;
-	double filterContoursMinArea = 0;  // default Double
-	double filterContoursMinPerimeter = 0;  // default Double
-	double filterContoursMinWidth = 40.0;  // default Double
+	double filterContoursMinArea = 0.0;  // default Double
+	double filterContoursMinPerimeter = 0.0;  // default Double
+	double filterContoursMinWidth = 20.0;  // default Double
 	double filterContoursMaxWidth = 1000.0;  // default Double
-	double filterContoursMinHeight = 100.0;  // default Double
-	double filterContoursMaxHeight = 1000;  // default Double
+	double filterContoursMinHeight = 50.0;  // default Double
+	double filterContoursMaxHeight = 1000.0;  // default Double
 	double filterContoursSolidity[] = {0, 100};
-	double filterContoursMaxVertices = 1000000;  // default Double
-	double filterContoursMinVertices = 0;  // default Double
-	double filterContoursMinRatio = 0;  // default Double
-	double filterContoursMaxRatio = 1000;  // default Double
+	double filterContoursMaxVertices = 1000000.0;  // default Double
+	double filterContoursMinVertices = 0.0;  // default Double
+	double filterContoursMinRatio = 0.0;  // default Double
+	double filterContoursMaxRatio = 1000.0;  // default Double
 	filterContours(filterContoursContours, filterContoursMinArea, filterContoursMinPerimeter, filterContoursMinWidth, filterContoursMaxWidth, filterContoursMinHeight, filterContoursMaxHeight, filterContoursSolidity, filterContoursMaxVertices, filterContoursMinVertices, filterContoursMinRatio, filterContoursMaxRatio, this->filterContoursOutput);
 }
 
+/**
+ * This method is a generated getter for the output of a Resize_Image.
+ * @return Mat output from Resize_Image.
+ */
+cv::Mat* GearTwo::GetResizeImageOutput(){
+	return &(this->resizeImageOutput);
+}
 /**
  * This method is a generated getter for the output of a HSL_Threshold.
  * @return Mat output from HSL_Threshold.
@@ -58,6 +72,19 @@ std::vector<std::vector<cv::Point> >* GearTwo::GetFindContoursOutput(){
 std::vector<std::vector<cv::Point> >* GearTwo::GetFilterContoursOutput(){
 	return &(this->filterContoursOutput);
 }
+	/**
+	 * Scales and image to an exact size.
+	 *
+	 * @param input The image on which to perform the Resize.
+	 * @param width The width of the output in pixels.
+	 * @param height The height of the output in pixels.
+	 * @param interpolation The type of interpolation.
+	 * @param output The image in which to store the output.
+	 */
+	void GearTwo::resizeImage(cv::Mat &input, double width, double height, int interpolation, cv::Mat &output) {
+		cv::resize(input, output, cv::Size(width, height), 0.0, 0.0, interpolation);
+	}
+
 	/**
 	 * Segment an image based on hue, saturation, and luminance ranges.
 	 *
