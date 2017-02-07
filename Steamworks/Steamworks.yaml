@@ -171,13 +171,23 @@ Children:
   - Children: []
     Properties:
       Number: !!robotbuilder.data.properties.ChoicesProperty
-        choices: ['0', '1', '2', '3', '4', '5']
+        choices: &id003 ['0', '1', '2', '3', '4', '5']
         default: 1
         name: Number
-        validators: [Joystick]
+        validators: &id004 [Joystick]
         value: '0'
     Base: Joystick
     Name: Driver Joystick
+  - Children: []
+    Properties:
+      Number: !!robotbuilder.data.properties.ChoicesProperty
+        choices: *id003
+        default: 1
+        name: Number
+        validators: *id004
+        value: '1'
+    Base: Joystick
+    Name: Support Joystick
   Properties: {}
   Base: OI
   Name: Operator Interface
@@ -233,7 +243,7 @@ Children:
       Commands: !!robotbuilder.data.properties.ListProperty
         default: []
         name: Commands
-        validators: &id011 [List]
+        validators: &id005 [List]
         value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
@@ -412,10 +422,10 @@ Children:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: Drive Train}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id003 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id003
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: false}
     Base: Command
@@ -430,10 +440,10 @@ Children:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: Payload}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id004 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id004
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: false}
     Base: Command
@@ -446,12 +456,15 @@ Children:
         validators: null
         value: []
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id005 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id005
+        value: []
       Commands: !!robotbuilder.data.properties.ListProperty
-        default: &id012
+        default: []
+        name: Commands
+        validators: *id005
+        value:
         - &id010 !!robotbuilder.data.CommandGroupEntry
           command:
             base: &id008
@@ -497,9 +510,6 @@ Children:
             validators: null
             value: []
           previous: *id010
-        name: Commands
-        validators: *id011
-        value: *id012
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command Group
@@ -508,9 +518,9 @@ Children:
   Base: Commands
   Name: Commands
 Properties:
-  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\GEH-Magnet
-      School 1\workspace', extension: null, folder: true, name: Eclipse Workspace,
-    validators: null, value: 'C:\Users\GEH-Magnet School 1\git\FRC-2017'}
+  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\nollchr\workspace',
+    extension: null, folder: true, name: Eclipse Workspace, validators: null, value: 'C:\Users\GEH-Magnet
+      School 1\git\FRC-2017'}
   Export Commands: !!robotbuilder.data.properties.BooleanProperty {default: true,
     name: Export Commands, validators: null, value: true}
   Autonomous command parameters: !!robotbuilder.data.properties.ParametersProperty
@@ -528,9 +538,9 @@ Properties:
     name: Export Subsystems, validators: null, value: true}
   Simulation World File: !!robotbuilder.data.properties.StringProperty {default: /usr/share/frcsim/worlds/GearsBotDemo.world,
     name: Simulation World File, validators: null, value: /usr/share/frcsim/worlds/GearsBotDemo.world}
-  Wiring file location: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\GEH-Magnet
-      School 1\', extension: null, folder: true, name: Wiring file location, validators: null,
-    value: 'C:\Users\GEH-Magnet School 1\'}
+  Wiring file location: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\nollchr\',
+    extension: null, folder: true, name: Wiring file location, validators: null, value: 'C:\Users\GEH-Magnet
+      School 1\'}
   Autonomous Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
     name: Autonomous Command, type: Command, validators: null, value: Autonomous Command}
 Base: Robot
