@@ -524,6 +524,6 @@ Properties:
       School 1\', extension: null, folder: true, name: Wiring file location, validators: null,
     value: 'C:\Users\GEH-Magnet School 1\'}
   Autonomous Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
-    name: Autonomous Command, type: Command, validators: null, value: Autonomous Command}
+    name: Autonomous Command, type: Command, validators: null, value: Autonomous Test Group}
 Base: Robot
 Name: Steamworks
