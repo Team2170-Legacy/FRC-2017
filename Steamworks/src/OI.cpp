@@ -19,6 +19,9 @@
 #include "Commands/BackDoorClose.h"
 #include "Commands/BackDoorOpen.h"
 #include "Commands/ClimberUp.h"
+#include "Commands/DumperOff.h"
+#include "Commands/DumperOn.h"
+#include "Commands/DumperOnWhileHeld.h"
 #include "Commands/ElevatorHome.h"
 #include "Commands/ElevatorInitialize.h"
 #include "Commands/ElevatorOffHome.h"
@@ -40,6 +43,7 @@ OI::OI() {
     
 
     // SmartDashboard Buttons
+    SmartDashboard::PutData("Dumper On While Held", new DumperOnWhileHeld());
     SmartDashboard::PutData("Elevator Initialize", new ElevatorInitialize());
     SmartDashboard::PutData("Elevator Home", new ElevatorHome());
     SmartDashboard::PutData("Autonomous Test Group", new AutonomousTestGroup());
