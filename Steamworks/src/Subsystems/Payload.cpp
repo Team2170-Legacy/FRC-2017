@@ -73,8 +73,18 @@ void Payload::SetBackDoorPosition(DoorPosition position) {
 
 
 
-void Payload::SetClimberSpeed(double speed) {
-	speedControllerClimber->Set(speed);
+void Payload::SetClimberSpeed(ClimberSpeed speed) {
+	switch (speed) {
+	case kUpFast:
+		speedControllerClimber->Set(kClimberSpeedFast);
+		break;
+	case kUpSlow:
+		speedControllerClimber->Set(kClimberSpeedSlow);
+		break;
+	case kUpStop:
+		speedControllerClimber->Set(kClimberSpeedStop);
+		break;
+	}
 }
 
 
@@ -104,10 +114,37 @@ void Payload::SetElevatorPosition(ElevatorPos position) {
 }
 
 void Payload::SlewElevator(ElevatorDir direction) {
+	double CurrentPosition=cANTalonElevator->GetPosition();
+	if (mCurrentMode == LoopMode::kOpenLoop) {
+		switch (direction) {
+		case kSlewDown:
+			cANTalonElevator->Set(kElevatorOpenLoopDownSpeed);
+			break;
+		case kSlewUp:
+			cANTalonElevator->Set(kElevatorOpenLoopUpSpeed);
+			break;
+		case kSlewStop:
+			cANTalonElevator->Set(kElevatorStopSpeed);
+			break;
+		}
+	} else if (mCurrentMode == LoopMode::kClosedLoop) {
+		switch (direction) {
+		case kSlewDown:
+			cANTalonElevator->Set(fmax(CurrentPosition-kElevatorClosedLoopDownSpeed,0));
+			break;
+		case kSlewUp:
+			cANTalonElevator->Set(fmin(CurrentPosition+kElevatorClosedLoopUpSpeed,kElevatorMaxPosition));
+			break;
+		case kSlewStop:
+			cANTalonElevator->Set(kElevatorStopSpeed);
+			break;
+		}
+	}
 }
 
 bool Payload::HomeSwitchActive() {
+	return limitSwitchHome->Get();
 }
-// Put methods for controlling this subsystem
+// Put methods for controlling this
 // here. Call these from Commands.
 

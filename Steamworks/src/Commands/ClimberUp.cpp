@@ -30,7 +30,7 @@ void ClimberUp::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ClimberUp::Execute() {
-	Robot::payload->SetClimberSpeed(Robot::payload->kClimberUpSpeed);
+	Robot::payload->SetClimberSpeed(Payload::ClimberSpeed::kUpFast);
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -40,7 +40,7 @@ bool ClimberUp::IsFinished() {
 
 // Called once after isFinished returns true
 void ClimberUp::End() {
-	Robot::payload->SetClimberSpeed(Robot::payload->kClimberStopSpeed);
+	Robot::payload->SetClimberSpeed(Payload::ClimberSpeed::kUpStop);
 }
 
 // Called when another command which requires one or more of the same

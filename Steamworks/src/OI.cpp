@@ -18,7 +18,6 @@
 #include "Commands/AutonomousTestGroup.h"
 #include "Commands/BackDoorClose.h"
 #include "Commands/BackDoorOpen.h"
-#include "Commands/ClimberDown.h"
 #include "Commands/ClimberUp.h"
 #include "Commands/ElevatorHome.h"
 #include "Commands/ElevatorInitialize.h"

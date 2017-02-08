@@ -59,7 +59,13 @@ public:
 		kDoorClosed
 	};
 	void SetBackDoorPosition(DoorPosition position);
-	void SetClimberSpeed(double speed);
+
+	enum ClimberSpeed {
+		kUpSlow,
+		kUpFast,
+		kUpStop
+	};
+	void SetClimberSpeed(ClimberSpeed speed);
 
 	enum LoopMode {
 		kOpenLoop,
@@ -85,9 +91,15 @@ public:
 
 	const double kIntakeOnSpeed=1.0;
 	const double kIntakeOffSpeed=0.0;
-	const double kClimberDownSpeed=-1.0;
-	const double kClimberUpSpeed=1.0;
-	const double kClimberStopSpeed=0.0;
+	const double kElevatorOpenLoopUpSpeed=0.5;
+	const double kElevatorOpenLoopDownSpeed=-0.5;
+	const double kElevatorClosedLoopUpSpeed=0.5;
+	const double kElevatorClosedLoopDownSpeed=-0.5;
+	const double kElevatorStopSpeed=0.0;
+	const double kClimberSpeedSlow=0.5;
+	const double kClimberSpeedFast=1.0;
+	const double kClimberSpeedStop=0.0;
+	const double kElevatorMaxPosition=1.0;
 
 private:
 	LoopMode mCurrentMode = LoopMode::kOpenLoop;
