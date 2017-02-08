@@ -78,7 +78,6 @@ void DriveTrain::DriveStraight(bool Backwards) {
 	}
 }
 
-
 void DriveTrain::DriveStraight(float magnitude) {
 
 		float ChassisAngle = ReadChassisYaw();

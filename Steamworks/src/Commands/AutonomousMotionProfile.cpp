@@ -41,6 +41,7 @@ void AutonomousMotionProfile::Initialize() {
 		Robot::driveTrain->FillProfileBuffer(mLeftWheel);
 	}
 	talonService.StartPeriodic(0.005);
+	Wait(.050);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -137,6 +138,7 @@ AutonomousMotionProfile::AutonomousMotionProfile(
 
 
 void AutonomousMotionProfile::PeriodicTask() {
+	printf("Test Notifier");
 	Robot::driveTrain->ServiceMotionProfile();
 }
 
