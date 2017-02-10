@@ -28,6 +28,7 @@
 #include "Commands/ElevatorPosition.h"
 #include "Commands/IntakeOff.h"
 #include "Commands/IntakeOn.h"
+#include "Commands/IntakeToggle.h"
 #include "Commands/TankDriveTeleop.h"
 #include "Commands/TeleopDrive.h"
 

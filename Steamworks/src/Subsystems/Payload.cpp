@@ -55,12 +55,15 @@ void Payload::SetIntakeSpeed(IntakeSpeed speed) {
 	switch (speed) {
 	case kIntakeStop:
 		cANTalonIntake->Set(0.0);
+		IntakeRunning = false;
 		break;
 	case kIntakeOut:
 		cANTalonIntake->Set(kIntakeSpeed);
+		IntakeRunning = true;
 		break;
 	case kIntakeIn:
 		cANTalonIntake->Set(-kIntakeSpeed);
+		IntakeRunning = true;
 		break;
 	}
 
@@ -148,6 +151,10 @@ void Payload::SlewElevator(ElevatorDir direction) {
 			break;
 		}
 	}
+}
+
+bool Payload::IsIntakeRunning() {
+	return IntakeRunning;
 }
 
 bool Payload::HomeSwitchActive() {
