@@ -17,6 +17,7 @@
 #include "WPILib.h"
 #include "AHRS.h"
 #include <cmath>
+#include "../CANTalonLogger.h"
 
 #define DEADBAND(val, limit)	((fabs(val) < limit) ? 0.0 : val)
 
@@ -55,10 +56,10 @@ private:
 	CANTalon::MotionProfileStatus LeftStatus;
 	CANTalon::MotionProfileStatus RightStatus;
 
-
-	// Temporary hacks until final sensors done
 	std::shared_ptr<MaxSonarEZ1> FrontSonar;
 	std::shared_ptr<AHRS> gyro;
+	std::shared_ptr<CANTalonLogger>	LeftLog;
+	std::shared_ptr<CANTalonLogger>	RightLog;
 
 
 	// It's desirable that everything possible is private except

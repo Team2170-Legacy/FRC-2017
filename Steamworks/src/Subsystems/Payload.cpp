@@ -115,7 +115,7 @@ void Payload::SetElevatorMode(LoopMode mode) {
 		cANTalonElevator->SetControlMode(CANTalon::ControlMode::kPosition);
 		break;
 	case kOpenLoop:
-		cANTalonElevator->SetControlMode(CANTalon::ControlMode::kVoltage);
+		cANTalonElevator->SetControlMode(CANTalon::ControlMode::kPercentVbus);
 		break;
 	}
 	mCurrentMode = mode;
