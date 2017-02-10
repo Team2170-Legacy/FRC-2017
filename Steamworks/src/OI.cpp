@@ -42,6 +42,8 @@ OI::OI() {
     
     driverJoystick.reset(new Joystick(0));
     
+    driverJoystickButtonA.reset(new JoystickButton(driverJoystick.get(), 1));
+    driverJoystickButtonA->WhenPressed(new IntakeToggle());
 
     // SmartDashboard Buttons
     SmartDashboard::PutData("Dumper On While Held", new DumperOnWhileHeld());
