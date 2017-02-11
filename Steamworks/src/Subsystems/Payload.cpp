@@ -141,6 +141,12 @@ void Payload::SlewElevator(ElevatorDir direction) {
 		case kSlewStop:
 			cANTalonElevator->Set(kElevatorStopSpeed);
 			break;
+		case kSlewHome:
+			cANTalonElevator->Set(kElevatorHomeSpeed);
+			break;
+		case kSlewOffHome:
+			cANTalonElevator->Set(-kElevatorHomeSpeed);
+			break;
 		}
 	} else if (mCurrentMode == LoopMode::kClosedLoop) {
 		switch (direction) {
@@ -153,6 +159,10 @@ void Payload::SlewElevator(ElevatorDir direction) {
 		case kSlewStop:
 			cANTalonElevator->Set(kElevatorStopSpeed);
 			break;
+		case kSlewHome:
+		case kSlewOffHome:
+			break;
+
 		}
 	}
 }

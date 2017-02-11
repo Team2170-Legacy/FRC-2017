@@ -41,6 +41,7 @@ private:
 	const double kClimberSpeedSlow=0.5;
 	const double kClimberSpeedFast=1.0;
 	const double kClimberSpeedStop=0.0;
+	const double kElevatorHomeSpeed=0.5;
 
 	bool IntakeRunning = false;
 	bool DoorOpen = false;
@@ -104,7 +105,9 @@ public:
 	enum ElevatorDir {
 		kSlewStop,
 		kSlewUp,
-		kSlewDown
+		kSlewDown,
+		kSlewHome,
+		kSlewOffHome
 	};
 	void SlewElevator(ElevatorDir direction);
 	bool HomeSwitchActive();

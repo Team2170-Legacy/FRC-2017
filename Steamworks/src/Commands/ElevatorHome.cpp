@@ -25,22 +25,22 @@ ElevatorHome::ElevatorHome(): Command() {
 
 // Called just before this Command runs the first time
 void ElevatorHome::Initialize() {
-
+	Robot::payload->SetElevatorMode(Payload::LoopMode::kOpenLoop);
 }
 
 // Called repeatedly when this Command is scheduled to run
 void ElevatorHome::Execute() {
-
+	Robot::payload->SlewElevator(Payload::ElevatorDir::kSlewHome);
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool ElevatorHome::IsFinished() {
-    return false;
+    return Robot::payload->HomeSwitchActive();
 }
 
 // Called once after isFinished returns true
 void ElevatorHome::End() {
-
+	Robot::payload->SlewElevator(Payload::ElevatorDir::kSlewStop);
 }
 
 // Called when another command which requires one or more of the same
