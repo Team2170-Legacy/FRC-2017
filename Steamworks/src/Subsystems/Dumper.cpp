@@ -40,17 +40,23 @@ void Dumper::DumperSetSpeed(DumperSpeed speed) {
 	switch (speed) {
 	case kDumperOff:
 		speedControllerDumper->Set(0.0);
+		DumperMoving = false;
 		break;
 	case kDumperForward:
 		speedControllerDumper->Set(kDumperSpeedForward);
+		DumperMoving = true;
 		break;
 	case kDumperBackward:
 		speedControllerDumper->Set(-kDumperSpeedForward);
+		DumperMoving = true;
 		break;
 	}
 
 }
 
+bool Dumper::IsDumperMoving() {
+	return DumperMoving;
+}
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 
