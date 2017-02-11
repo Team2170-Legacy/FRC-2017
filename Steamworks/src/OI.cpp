@@ -22,6 +22,7 @@
 #include "Commands/DumperOff.h"
 #include "Commands/DumperOn.h"
 #include "Commands/DumperOnWhileHeld.h"
+#include "Commands/DumperToggle.h"
 #include "Commands/ElevatorHome.h"
 #include "Commands/ElevatorInitialize.h"
 #include "Commands/ElevatorOffHome.h"
@@ -46,9 +47,7 @@ OI::OI() {
     driverJoystickButtonA->WhenPressed(new IntakeToggle());
 
     // SmartDashboard Buttons
-    SmartDashboard::PutData("Dumper On While Held", new DumperOnWhileHeld());
     SmartDashboard::PutData("Elevator Initialize", new ElevatorInitialize());
-    SmartDashboard::PutData("Elevator Home", new ElevatorHome());
     SmartDashboard::PutData("Autonomous Test Group", new AutonomousTestGroup());
     SmartDashboard::PutData("Autonomous Command", new AutonomousCommand());
 
