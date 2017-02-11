@@ -44,7 +44,7 @@ OI::OI() {
     
     driverJoystick.reset(new Joystick(0));
     
-    driverJoystickButtonX.reset(new JoystickButton(driverJoystick.get(), 4));
+    driverJoystickButtonX.reset(new JoystickButton(driverJoystick.get(), 3));
     driverJoystickButtonX->WhenPressed(new BackDoorToggle());
     driverJoystickButtonB.reset(new JoystickButton(driverJoystick.get(), 2));
     driverJoystickButtonB->WhenPressed(new DumperToggle());
