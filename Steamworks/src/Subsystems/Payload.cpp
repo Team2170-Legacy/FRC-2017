@@ -76,10 +76,12 @@ void Payload::SetBackDoorPosition(DoorPosition position) {
 	case kDoorOpen:
 		doorServoA->Set(kDoorOpenPosition);
 		doorServoB->Set(kDoorOpenPosition);
+		DoorOpen = true;
 		break;
 	case kDoorClosed:
 		doorServoA->Set(kDoorClosePosition);
 		doorServoB->Set(kDoorClosePosition);
+		DoorOpen = false;
 		break;
 	}
 }
@@ -161,6 +163,10 @@ bool Payload::IsIntakeRunning() {
 
 bool Payload::HomeSwitchActive() {
 	return limitSwitchHome->Get();
+}
+
+bool Payload::IsDoorOpen() {
+	return DoorOpen;
 }
 // Put methods for controlling this
 // here. Call these from Commands.
