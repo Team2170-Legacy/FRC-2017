@@ -25,6 +25,6 @@ DumperOff::DumperOff(): InstantCommand() {
 
 // Called once when this command runs
 void DumperOff::Initialize() {
-
+	Robot::dumper->DumperSetSpeed(Dumper::DumperSpeed::kDumperOff);
 }
 
