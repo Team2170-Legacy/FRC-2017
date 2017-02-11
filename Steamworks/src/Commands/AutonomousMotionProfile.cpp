@@ -30,7 +30,7 @@ AutonomousMotionProfile::AutonomousMotionProfile(): Command(),
 
 // Called just before this Command runs the first time
 void AutonomousMotionProfile::Initialize() {
-	Robot::driveTrain->SetChassisMode(CANTalon::ControlMode::kMotionProfile);
+	Robot::driveTrain->SetChassisMode(CANTalon::TalonControlMode::kMotionProfileMode);
 	AutonomousMotionProfile::Notifier_counter = 0;
 	printf("initialize\n");
 	if (bResetGyro) {
@@ -67,7 +67,7 @@ bool AutonomousMotionProfile::IsFinished() {
 void AutonomousMotionProfile::End() {
 	talonService.Stop();
 	Robot::driveTrain->SetMotionProfileState(CANTalon::SetValueMotionProfileHold);
-	Robot::driveTrain->SetChassisMode(CANTalon::ControlMode::kPercentVbus);
+	Robot::driveTrain->SetChassisMode(CANTalon::TalonControlMode::kThrottleMode);
 }
 
 

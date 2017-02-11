@@ -100,8 +100,8 @@ void DriveTrain::StopMotors(void) {
 }
 
 void DriveTrain::SetVoltagePercentMode() {
-	cANTalonLeft->SetControlMode(CANSpeedController::ControlMode::kPercentVbus);
-	cANTalonRight->SetControlMode(CANSpeedController::ControlMode::kPercentVbus);
+	cANTalonLeft->SetTalonControlMode(CANTalon::TalonControlMode::kThrottleMode);
+	cANTalonRight->SetTalonControlMode(CANTalon::TalonControlMode::kThrottleMode);
 	SetRampRate(kDefaultVoltageRamp);
 	cANTalonLeft->Set(0.0);
 	cANTalonRight->Set(0.0);
@@ -148,8 +148,8 @@ double DriveTrain::AxisPower(double axis, double exponent) {
 }
 
 void DriveTrain::SetClosedLoopMode() {
-	cANTalonLeft->SetControlMode(CANSpeedController::ControlMode::kPosition);
-	cANTalonRight->SetControlMode(CANSpeedController::ControlMode::kPosition);
+	cANTalonLeft->SetTalonControlMode(CANTalon::TalonControlMode::kPositionMode);
+	cANTalonRight->SetTalonControlMode(CANTalon::TalonControlMode::kPositionMode);
 
 	SetRampRate(0.0);
 
@@ -161,11 +161,11 @@ void DriveTrain::SetClosedLoopMode() {
 }
 
 void DriveTrain::SetMotionProfileMode() {
-	cANTalonLeft->SetControlMode(CANSpeedController::ControlMode::kMotionProfile);
+	cANTalonLeft->SetTalonControlMode(CANTalon::TalonControlMode::kMotionProfileMode);
 	cANTalonLeft->SetPosition(0.0);
 	cANTalonLeft->Set(CANTalon::SetValueMotionProfile::SetValueMotionProfileDisable);
 
-	cANTalonRight->SetControlMode(CANSpeedController::ControlMode::kMotionProfile);
+	cANTalonRight->SetTalonControlMode(CANTalon::TalonControlMode::kMotionProfileMode);
 	cANTalonRight->SetPosition(0.0);
 	cANTalonRight->Set(CANTalon::SetValueMotionProfile::SetValueMotionProfileDisable);
 
@@ -177,9 +177,9 @@ float DriveTrain::ReadChassisDistance() {
 }
 
 void DriveTrain::Rotate(float velocity) {
-	if ((cANTalonLeft->GetControlMode() == CANTalon::ControlMode::kSpeed)
-			&& (cANTalonRight->GetControlMode()
-					== CANTalon::ControlMode::kSpeed)) {
+	if ((cANTalonLeft->GetTalonControlMode() == CANTalon::TalonControlMode::kSpeedMode)
+			&& (cANTalonRight->GetTalonControlMode()
+					== CANTalon::TalonControlMode::kSpeedMode)) {
 		cANTalonLeft->Set(velocity);
 		cANTalonRight->Set(velocity);
 	}
@@ -190,15 +190,15 @@ double DriveTrain::ReadPositionError() {
 }
 
 void DriveTrain::SetVelocityMode() {
-	cANTalonLeft->SetControlMode(CANTalon::ControlMode::kSpeed);
+	cANTalonLeft->SetTalonControlMode(CANTalon::TalonControlMode::kSpeedMode);
 	cANTalonLeft->Set(0.0);
-	cANTalonRight->SetControlMode(CANTalon::ControlMode::kSpeed);
+	cANTalonRight->SetTalonControlMode(CANTalon::TalonControlMode::kSpeedMode);
 	cANTalonRight->Set(0.0);
 }
 
 void DriveTrain::SetChassisVelocity(float vIPS) {
-	if ((cANTalonLeft->GetControlMode() == CANTalon::ControlMode::kSpeed)
-			&& (cANTalonRight->GetControlMode() == CANTalon::ControlMode::kSpeed)) {
+	if ((cANTalonLeft->GetTalonControlMode() == CANTalon::TalonControlMode::kSpeedMode)
+			&& (cANTalonRight->GetTalonControlMode() == CANTalon::TalonControlMode::kSpeedMode)) {
 		cANTalonLeft->Set(vIPS * InchesPerRotation);
 		cANTalonRight->Set(-vIPS * InchesPerRotation);
 	}
@@ -206,8 +206,8 @@ void DriveTrain::SetChassisVelocity(float vIPS) {
 
 void DriveTrain::SetChassisPosition(float positionInches) {
 	if ((cANTalonLeft->GetControlMode() == CANTalon::ControlMode::kPosition)
-			&& (cANTalonRight->GetControlMode()
-					== CANTalon::ControlMode::kPosition)) {
+			&& (cANTalonRight->GetTalonControlMode()
+					== CANTalon::TalonControlMode::kPositionMode)) {
 		cANTalonLeft->Set(positionInches / InchesPerRotation);
 		cANTalonRight->Set(-positionInches / InchesPerRotation);
 	}
@@ -293,6 +293,8 @@ void DriveTrain::FillProfileBuffer(std::shared_ptr<const ProfileData> LeftWheel,
 void  DriveTrain::ServiceMotionProfile() {
 	cANTalonLeft->ProcessMotionProfileBuffer();
 	cANTalonRight->ProcessMotionProfileBuffer();
+	LeftLog->Update();
+	RightLog->Update();
 }
 
 void DriveTrain::SetBrakeMode(CANTalon::NeutralMode Mode) {
@@ -354,22 +356,24 @@ bool DriveTrain::MotionProfileComplete() {
 	return Complete;
 }
 
-CANSpeedController::ControlMode DriveTrain::GetChassisMode() {
-	return cANTalonLeft->GetControlMode();
+CANTalon::TalonControlMode DriveTrain::GetChassisMode() {
+	return cANTalonLeft->GetTalonControlMode();
 }
 
-void DriveTrain::SetChassisMode(CANTalon::ControlMode mode) {
+void DriveTrain::SetChassisMode(CANTalon::TalonControlMode mode) {
 	switch (mode) {
-	case CANTalon::ControlMode::kMotionProfile:
+	case CANTalon::TalonControlMode::kMotionProfileMode:
 		SetMotionProfileMode();
 		break;
-	case CANTalon::ControlMode::kPosition:
+	case CANTalon::TalonControlMode::kPositionMode:
 		SetClosedLoopMode();
 		break;
-	case CANTalon::ControlMode::kSpeed:
+	case CANTalon::TalonControlMode::kSpeedMode:
 		SetVelocityMode();
 		break;
-	case CANTalon::ControlMode::kPercentVbus:
+	case CANTalon::TalonControlMode::kMotionMagicMode:
+		break;
+	case CANTalon::TalonControlMode::kThrottleMode:
 	default:
 		SetVoltagePercentMode();
 		break;
@@ -377,10 +381,10 @@ void DriveTrain::SetChassisMode(CANTalon::ControlMode mode) {
 }
 
 void DriveTrain::InitTalons(void) {
-    cANTalonSlaveLeft->SetControlMode(CANTalon::ControlMode::kFollower);
+    cANTalonSlaveLeft->SetTalonControlMode(CANTalon::TalonControlMode::kFollowerMode);
     cANTalonSlaveLeft->SetSafetyEnabled(false);
     cANTalonSlaveLeft->Set(1);
-    cANTalonSlaveRight->SetControlMode(CANTalon::ControlMode::kFollower);
+    cANTalonSlaveRight->SetTalonControlMode(CANTalon::TalonControlMode::kFollowerMode);
     cANTalonSlaveRight->SetSafetyEnabled(false);
     cANTalonSlaveRight->Set(2);
 
@@ -424,3 +428,7 @@ void DriveTrain::TankDrive(float Left, float Right) {
 	    cANTalonSlaveLeft->Set(1);
 }
 
+void DriveTrain::TelemetryFlush() {
+	LeftLog->Flush();
+	RightLog->Flush();
+}

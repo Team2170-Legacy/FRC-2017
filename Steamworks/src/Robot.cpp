@@ -55,6 +55,7 @@ void Robot::RobotInit() {
  */
 void Robot::DisabledInit(){
 	payload->SetIntakeSpeed(Payload::IntakeSpeed::kIntakeStop);
+	driveTrain->TelemetryFlush();
 
 }
 

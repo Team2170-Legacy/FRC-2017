@@ -23,6 +23,10 @@ void CANTalonLogger::Update() {
 	}
 }
 
+void CANTalonLogger::Flush() {
+	tLog.flush();
+}
+
 CANTalonLogger::~CANTalonLogger() {
 	// TODO Auto-generated destructor stub
 	tLog.close();
@@ -30,7 +34,7 @@ CANTalonLogger::~CANTalonLogger() {
 
 CANTalonLogger::CANTalonLogger(std::shared_ptr<CANTalon> talon, std::string name) {
 	Talon = talon;
-	tLog.open(name);
+	tLog.open(name, std::ofstream::out | std::ofstream::app);
 	tLog << "Postion, Setpoint, Error, Speed, Voltage, Current\n";
 }
 

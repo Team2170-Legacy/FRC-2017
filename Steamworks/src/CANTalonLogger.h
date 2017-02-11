@@ -16,6 +16,7 @@ class CANTalonLogger {
 public:
 	CANTalonLogger();
 	CANTalonLogger(std::shared_ptr<CANTalon> talon, std::string name);
+	void Flush();
 	void Update();
 	virtual ~CANTalonLogger();
 private:
