@@ -18,6 +18,7 @@
 #include "Commands/AutonomousTestGroup.h"
 #include "Commands/BackDoorClose.h"
 #include "Commands/BackDoorOpen.h"
+#include "Commands/BackDoorToggle.h"
 #include "Commands/ClimberUp.h"
 #include "Commands/DumperOff.h"
 #include "Commands/DumperOn.h"
@@ -43,6 +44,8 @@ OI::OI() {
     
     driverJoystick.reset(new Joystick(0));
     
+    driverJoystickButtonX.reset(new JoystickButton(driverJoystick.get(), 4));
+    driverJoystickButtonX->WhenPressed(new BackDoorToggle());
     driverJoystickButtonB.reset(new JoystickButton(driverJoystick.get(), 2));
     driverJoystickButtonB->WhenPressed(new DumperToggle());
     driverJoystickButtonA.reset(new JoystickButton(driverJoystick.get(), 1));
