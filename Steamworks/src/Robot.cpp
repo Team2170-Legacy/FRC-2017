@@ -55,6 +55,7 @@ void Robot::RobotInit() {
  */
 void Robot::DisabledInit(){
 	payload->SetIntakeSpeed(Payload::IntakeSpeed::kIntakeStop);
+	dumper->DumperSetSpeed(Dumper::DumperSpeed::kDumperOff);
 	driveTrain->TelemetryFlush();
 
 }
@@ -87,6 +88,7 @@ void Robot::TeleopInit() {
 
 void Robot::TeleopPeriodic() {
 	SmartDashboard::PutBoolean("Intake Running", payload->IsIntakeRunning());
+	SmartDashboard::PutBoolean("Dumper Running", dumper->IsDumperMoving());
 	Scheduler::GetInstance()->Run();
 }
 
