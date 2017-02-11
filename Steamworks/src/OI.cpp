@@ -43,6 +43,8 @@ OI::OI() {
     
     driverJoystick.reset(new Joystick(0));
     
+    driverJoystickButtonB.reset(new JoystickButton(driverJoystick.get(), 2));
+    driverJoystickButtonB->WhenPressed(new DumperToggle());
     driverJoystickButtonA.reset(new JoystickButton(driverJoystick.get(), 1));
     driverJoystickButtonA->WhenPressed(new IntakeToggle());
 
