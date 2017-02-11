@@ -83,7 +83,7 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
-	SmartDashboard::PutBoolean("Intake Running", payload->IsIntakeRunning());
+	//SmartDashboard::PutBoolean("Intake Running", payload->IsIntakeRunning());
 	Scheduler::GetInstance()->Run();
 }
 
