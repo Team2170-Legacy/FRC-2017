@@ -35,10 +35,10 @@ void Robot::VisionThread() {
 
 //	cs::SetCameraExposureManual(0, 10, status_ptr);
 //	usleep(1000000);
-	cs::UsbCamera camera = CameraServer::GetInstance()->StartAutomaticCapture();
+	cs::UsbCamera camera = CameraServer::GetInstance()->StartAutomaticCapture(0);
 //	camera.SetResolution(640, 480);
 	camera.SetResolution(320, 240);
-	camera.SetExposureManual(0);
+	camera.SetExposureManual(20);
 	usleep(1000000);
 
 //	cs::SetCameraExposureManual(0, 10, status_ptr);
@@ -129,6 +129,112 @@ void Robot::VisionThread() {
 	} // while(true)
 }; //void Robot::VisionThread()
 
+void Robot::VisionThreadBBoiler() {
+	int status = 1;
+	int* status_ptr = &status;
+
+	//	cs::SetCameraExposureHoldCurrent(0, status_ptr);
+	//	usleep(1000000);
+		//cs::SetCameraExposureManual(0, 2, status_ptr);
+		//usleep(1000000);
+
+		//cs::SetCameraBrightness(0, 2, status_ptr);
+
+//	cs::SetCameraExposureManual(0, 10, status_ptr);
+//	usleep(1000000);
+	cs::UsbCamera camera2 = CameraServer::GetInstance()->StartAutomaticCapture(1);
+//	camera.SetResolution(640, 480);
+	camera2.SetResolution(320, 240);
+	//camera.SetBrightness(50);
+
+	usleep(1000000);
+
+//	cs::SetCameraExposureManual(0, 10, status_ptr);
+//	camera.SetCameraExposureManual(0, 10, status_ptr);
+
+	cs::CvSink cvSink = CameraServer::GetInstance()->GetVideo();
+	//cs::CvSource outputStreamStd = CameraServer::GetInstance()->PutVideo("Cam0", 640, 480);
+	camera2.SetExposureManual(100);
+	cs::CvSource outputStreamStd2 = CameraServer::GetInstance()->PutVideo("Cam1", 320, 240);
+
+//	cs::SetCameraExposureManual(0, 10, status_ptr);
+
+//	CS_Source our_cam_device = cs::CreateUsbCameraDev("Cam0", 0, status_ptr);
+//	cs::SetCameraExposureManual(our_cam_device, 10, status_ptr);
+
+//	usleep(5000000);
+//	cs::SetSourceFPS(0, 30, status_ptr);
+
+
+	cv::Mat source;
+	cv::Mat output;
+
+	grip::BBoilerPipeline BBoilerPipeline;
+
+	cv::Rect r1, r8;
+
+	std::vector<std::vector<cv::Point> >* contours_ptr;
+	std::vector<std::vector<cv::Point> > contours;
+	std::vector<cv::Point> contour1;
+	std::vector<cv::Point> contour8;
+
+
+	while(true) {
+	//while(false) {
+//		cs::SetCameraExposureManual(0, 10, status_ptr);
+
+		cvSink.GrabFrame(source);
+
+		// MK 2/4 8:26pm
+		BBoilerPipeline.Process(source);
+		//	GearPipeline.Process(GearInput);
+
+		contours_ptr = BBoilerPipeline.GetFilterContoursOutput();
+		contours = *contours_ptr;
+
+//		cvtColor(source, output, cv::COLOR_BGR2RGB);
+		output = source;
+
+		if (!contours.empty())
+		{
+			contour1 = contours[0];
+			contour8 = contours[7];
+			//r = cv::boundingRect(GearPipeline.GetFindContoursOutput()[0]);	DOESN'T WORK!!!
+			r1 = cv::boundingRect(contour1);
+			r8 = cv::boundingRect(contour8);
+			cv::Point tl1 = r1.tl();	//Rect_::x and Rect_::y
+			cv::Point br1 = r1.br();
+			cv::Point tl8 = r8.tl();	//Rect_::x and Rect_::y
+			cv::Point br8 = r8.br();
+
+			cv::Scalar color2 = cv::Scalar(255,255,0); // BGR for cyan
+			cv::rectangle(output, tl1, br1, color2, 4, 8, 0);
+			cv::rectangle(output, tl8, br8, color2, 4, 8, 0);
+
+			int midpt_r1 [2] = {(tl1.x + br1.x) / 2, (tl1.y + br1.y) / 2};
+			int midpt_r2 [2] = {(tl8.x + br8.x) / 2, (tl8.y + br8.y) / 2};
+			int gear [2] = {(midpt_r1 [0] + midpt_r2 [0]) / 2, (midpt_r1 [1] + midpt_r2 [1]) / 2};
+
+			cv::Point BBoiler_midpoint( gear[0], gear[1]);
+			cv::line(output, BBoiler_midpoint, BBoiler_midpoint, color2, 4);
+
+			Gear_x = gear[0];			// Transfer Gear Target x-location to other threads & Robot command functions
+			e_Gear_x = Gear_x - 160;	// Define error in Gear_x location
+
+//			std::cout << "Midpoint of Rectangle 1: (" << midpt_r1 [0] << "," << midpt_r1 [1] << ")" << std::endl;
+//			std::cout << "Midpoint of Rectangle 2: (" << midpt_r2 [0] << "," << midpt_r2 [1] << ")" << std::endl;
+//			std::cout << "Gear Location: (" << gear [0] << "," << gear [1] << ")" << std::endl;
+
+			//cv::Point r1tl = cv::Point(100, 100);
+			//cv::Point r1br = cv::Point(400, 400);
+			//cv::rectangle(output, r1tl, r1br, color, 4, 8, 0);
+			//cv::rectangle(source, r2.tl(), r2.br(), color, 4, 8, 0);
+
+		} // if (!contours.empty())
+		outputStreamStd2.PutFrame(output);
+	} // while(true)
+}; //void Robot::VisionThread()
+
 void Robot::RobotInit() {
 	RobotMap::init();
 
@@ -153,6 +259,10 @@ void Robot::RobotInit() {
 
 	std::thread visionThread(VisionThread);
 	visionThread.detach();
+
+	std::thread visionThreadBBoiler(VisionThreadBBoiler);
+	visionThreadBBoiler.detach();
+
 	//cs::CvSource outputStreamStd = CameraServer::GetInstance()->PutVideo("Gear1", 640, 480);
 
 	//table = NetworkTable::GetTable("ContourReport");
