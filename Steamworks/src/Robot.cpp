@@ -54,11 +54,13 @@ void Robot::RobotInit() {
  * You can use it to reset subsystems before shutting down.
  */
 void Robot::DisabledInit(){
+	payload->SetIntakeSpeed(Payload::IntakeSpeed::kIntakeStop);
 
 }
 
 void Robot::DisabledPeriodic() {
 	Scheduler::GetInstance()->Run();
+	SmartDashboard::PutBoolean("Intake Running", payload->IsIntakeRunning());
 }
 
 void Robot::AutonomousInit() {
