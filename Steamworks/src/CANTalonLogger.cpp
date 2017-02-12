@@ -27,6 +27,18 @@ void CANTalonLogger::Flush() {
 	tLog.flush();
 }
 
+void CANTalonLogger::StartSession() {
+	if (!tLog.is_open()) {
+		tLog.open(mFilename, std::ofstream::out | std::ofstream::app);
+	}
+}
+
+void CANTalonLogger::EndSession() {
+	if (tLog.is_open()) {
+		tLog.close();
+	}
+}
+
 CANTalonLogger::~CANTalonLogger() {
 	// TODO Auto-generated destructor stub
 	tLog.close();
@@ -34,7 +46,8 @@ CANTalonLogger::~CANTalonLogger() {
 
 CANTalonLogger::CANTalonLogger(std::shared_ptr<CANTalon> talon, std::string name) {
 	Talon = talon;
-	tLog.open(name, std::ofstream::out | std::ofstream::app);
-	tLog << "Postion, Setpoint, Error, Speed, Voltage, Current\n";
+	mFilename = name;
+	tLog.open(mFilename, std::ofstream::out | std::ofstream::trunc);
+	tLog << "Position, Setpoint, Error, Speed, Voltage, Current\n";
 }
 

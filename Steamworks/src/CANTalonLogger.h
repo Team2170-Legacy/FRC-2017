@@ -18,10 +18,13 @@ public:
 	CANTalonLogger(std::shared_ptr<CANTalon> talon, std::string name);
 	void Flush();
 	void Update();
+	void StartSession();
+	void EndSession();
 	virtual ~CANTalonLogger();
 private:
 	std::shared_ptr<CANTalon> Talon;
 	std::ofstream tLog;
+	std::string mFilename;
 };
 
 #endif /* SRC_CANTALONLOGGER_H_ */

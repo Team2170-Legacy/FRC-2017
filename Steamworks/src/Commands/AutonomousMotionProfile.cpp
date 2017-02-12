@@ -148,7 +148,6 @@ AutonomousMotionProfile::AutonomousMotionProfile(
 
 
 void AutonomousMotionProfile::PeriodicTask() {
-	printf("Test Notifier");
 	Robot::driveTrain->ServiceMotionProfile();
 	Notifier_counter++;
 }

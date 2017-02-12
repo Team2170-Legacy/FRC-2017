@@ -75,8 +75,9 @@ private:
 public:
 	DriveTrain();
 	void InitDefaultCommand();
-	void SetChassisPosition(float position);
-	void SetChassisVelocity(float velocity);
+	void SetChassisPosition(double position);
+	void SetChassisVelocity(double velocity);
+	void SetChassisVelocity(double velocity, double error);
 	void FillProfileBuffer(std::shared_ptr<const ProfileData> LeftWheel);
 	void FillProfileBuffer(std::shared_ptr<const ProfileData> LeftWheel,
 			std::shared_ptr<const ProfileData> RightWheel);
