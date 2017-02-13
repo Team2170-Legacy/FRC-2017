@@ -413,7 +413,7 @@ void DriveTrain::InitTalons(void) {
 	cANTalonRight->SetSensorDirection(prefs->GetBoolean("SensorDirection", true));
 
 	SetMotorGains();
-	SetBrakeMode(CANTalon::NeutralMode::kNeutralMode_Brake);
+	SetBrakeMode(CANTalon::NeutralMode::kNeutralMode_Coast);
 
 	cANTalonLeft->EnableControl();
 	cANTalonSlaveLeft->EnableControl();
