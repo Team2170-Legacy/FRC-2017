@@ -169,6 +169,8 @@ void DriveTrain::SetMotionProfileMode() {
 	cANTalonRight->SetPosition(0.0);
 	cANTalonRight->Set(CANTalon::SetValueMotionProfile::SetValueMotionProfileDisable);
 
+	LeftLog->StartSession();
+	RightLog->StartSession();
 	SetRampRate(0.0);
 }
 
@@ -301,8 +303,9 @@ void DriveTrain::FillProfileBuffer(std::shared_ptr<const ProfileData> LeftWheel,
 void  DriveTrain::ServiceMotionProfile() {
 	cANTalonLeft->ProcessMotionProfileBuffer();
 	cANTalonRight->ProcessMotionProfileBuffer();
-	LeftLog->Update();
+
 	RightLog->Update();
+	LeftLog->Update();
 }
 
 void DriveTrain::SetBrakeMode(CANTalon::NeutralMode Mode) {
