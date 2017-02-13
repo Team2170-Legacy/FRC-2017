@@ -19,7 +19,7 @@ void CANTalonLogger::Update() {
 		tLog << Talon->GetClosedLoopError() << ", ";
 		tLog << Talon->GetSpeed() << ", ";
 		tLog << Talon->GetOutputVoltage() << ", ";
-		tLog << Talon->GetOutputCurrent() << "\n";
+		tLog << Talon->GetOutputCurrent() << std::endl;
 	}
 }
 
@@ -48,6 +48,6 @@ CANTalonLogger::CANTalonLogger(std::shared_ptr<CANTalon> talon, std::string name
 	Talon = talon;
 	mFilename = name;
 	tLog.open(mFilename, std::ofstream::out | std::ofstream::trunc);
-	tLog << "Position, Setpoint, Error, Speed, Voltage, Current\n";
+	tLog << "Position, Setpoint, Error, Speed, Voltage, Current" << std::endl;
 }
 

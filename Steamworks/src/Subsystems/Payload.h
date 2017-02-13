@@ -38,8 +38,8 @@ private:
 	const double kElevatorClosedLoopDownSpeed=-0.5;
 	const double kElevatorMaxPosition;
 	const double kElevatorStopSpeed=0.0;
-	const double kClimberSpeedSlow=0.5;
-	const double kClimberSpeedFast=1.0;
+	const double kClimberSpeedSlow;
+	const double kClimberSpeedFast;
 	const double kClimberSpeedStop=0.0;
 	const double kElevatorHomeSpeed=0.5;
 
