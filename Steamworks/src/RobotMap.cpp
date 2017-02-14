@@ -24,8 +24,8 @@ std::shared_ptr<CANTalon> RobotMap::driveTrainCANTalonSlaveLeft;
 std::shared_ptr<CANTalon> RobotMap::driveTrainCANTalonSlaveRight;
 std::shared_ptr<Servo> RobotMap::payloadDoorServoA;
 std::shared_ptr<CANTalon> RobotMap::payloadCANTalonElevator;
-std::shared_ptr<CANTalon> RobotMap::payloadCANTalonIntake;
-std::shared_ptr<SpeedController> RobotMap::payloadSpeedControllerClimber;
+std::shared_ptr<CANTalon> RobotMap::payloadCANTalonClimber;
+std::shared_ptr<SpeedController> RobotMap::payloadSpeedControllerIntake;
 std::shared_ptr<DigitalInput> RobotMap::payloadLimitSwitchHome;
 std::shared_ptr<Servo> RobotMap::payloadDoorServoB;
 std::shared_ptr<SpeedController> RobotMap::dumperSpeedControllerDumper;
@@ -62,11 +62,11 @@ void RobotMap::init() {
     payloadCANTalonElevator.reset(new CANTalon(5));
     lw->AddActuator("Payload", "CAN Talon Elevator", payloadCANTalonElevator);
     
-    payloadCANTalonIntake.reset(new CANTalon(6));
-    lw->AddActuator("Payload", "CAN Talon Intake", payloadCANTalonIntake);
+    payloadCANTalonClimber.reset(new CANTalon(6));
+    lw->AddActuator("Payload", "CAN Talon Climber", payloadCANTalonClimber);
     
-    payloadSpeedControllerClimber.reset(new Victor(1));
-    lw->AddActuator("Payload", "Speed Controller Climber", std::static_pointer_cast<Victor>(payloadSpeedControllerClimber));
+    payloadSpeedControllerIntake.reset(new Victor(1));
+    lw->AddActuator("Payload", "Speed Controller Intake", std::static_pointer_cast<Victor>(payloadSpeedControllerIntake));
     
     payloadLimitSwitchHome.reset(new DigitalInput(0));
     lw->AddSensor("Payload", "Limit Switch Home", payloadLimitSwitchHome);

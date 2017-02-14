@@ -83,7 +83,6 @@ void DriveTrain::DriveStraight(bool Backwards) {
 void DriveTrain::DriveStraight(float magnitude) {
 
 		float ChassisAngle = ReadChassisYaw();
-		printf ("%f\n", ChassisAngle);
 
 		if (magnitude > 0.0) {
 			robotDrive->Drive(magnitude, mYawGain * ChassisAngle);
@@ -346,15 +345,16 @@ bool DriveTrain::MotionProfileComplete() {
 	cANTalonLeft->GetMotionProfileStatus(LeftStatus);
 	cANTalonRight->GetMotionProfileStatus(RightStatus);
 
+#ifdef DEBUG_TALON
 	printf("Remaining top buffer points:  %d\n", LeftStatus.topBufferRem);
 	printf("Bottom buffer count:  %d\n", LeftStatus.btmBufferCnt);
 	printf("IsUnderrun status:  %d\n", LeftStatus.isUnderrun);
+#endif
 
 	// Start motion profile processing after 5 points are in talon buffer
 	if ((!mMotionProcessingActive) && (LeftStatus.btmBufferCnt > 5)) {
 		SetMotionProfileState(CANTalon::SetValueMotionProfile::SetValueMotionProfileEnable);
 		mMotionProcessingActive = true;
-		printf("Enabling motion processing\n");
 	}
 
 	if ((LeftStatus.activePointValid && LeftStatus.activePoint.isLastPoint) &&
@@ -363,7 +363,6 @@ bool DriveTrain::MotionProfileComplete() {
 		mMotionProcessingActive = false;
 		LeftLog->EndSession();
 		RightLog->EndSession();
-		printf("Motion Profile Complete\n");
 	}
 
 	return Complete;

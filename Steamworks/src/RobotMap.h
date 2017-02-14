@@ -35,8 +35,8 @@ public:
 	static std::shared_ptr<CANTalon> driveTrainCANTalonSlaveRight;
 	static std::shared_ptr<Servo> payloadDoorServoA;
 	static std::shared_ptr<CANTalon> payloadCANTalonElevator;
-	static std::shared_ptr<CANTalon> payloadCANTalonIntake;
-	static std::shared_ptr<SpeedController> payloadSpeedControllerClimber;
+	static std::shared_ptr<CANTalon> payloadCANTalonClimber;
+	static std::shared_ptr<SpeedController> payloadSpeedControllerIntake;
 	static std::shared_ptr<DigitalInput> payloadLimitSwitchHome;
 	static std::shared_ptr<Servo> payloadDoorServoB;
 	static std::shared_ptr<SpeedController> dumperSpeedControllerDumper;

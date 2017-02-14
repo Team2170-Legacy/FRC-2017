@@ -14,13 +14,10 @@ CANTalonLogger::CANTalonLogger() {
 
 void CANTalonLogger::Update() {
 	if (tLog.is_open()) {
-		printf("update\n");
-		tLog << Talon->GetPosition() << ", ";
-		tLog << Talon->GetSetpoint() << ", ";
-		tLog << Talon->GetClosedLoopError() << ", ";
-		tLog << Talon->GetSpeed() << ", ";
-		tLog << Talon->GetOutputVoltage() << ", ";
-		tLog << Talon->GetOutputCurrent() << std::endl;
+		tLog << Talon->GetPosition() << ", " << Talon->GetSetpoint() << ", "
+				<< Talon->GetClosedLoopError() << ", "<< Talon->GetSpeed() << ", "
+				<< Talon->GetOutputVoltage() << ", " << Talon->GetOutputCurrent()
+				<< std::endl;
 	}
 }
 
@@ -30,14 +27,12 @@ void CANTalonLogger::Flush() {
 
 void CANTalonLogger::StartSession() {
 	if (!tLog.is_open()) {
-		printf("start session\n");
 		tLog.open(mFilename, std::ofstream::out | std::ofstream::app);
 	}
 }
 
 void CANTalonLogger::EndSession() {
 	if (tLog.is_open()) {
-		printf("end session\n");
 		tLog.close();
 	}
 }

@@ -119,7 +119,7 @@ Children:
           validators: *id002
           value: '6'
       Base: CAN Talon
-      Name: CAN Talon Intake
+      Name: CAN Talon Climber
     - Children: []
       Properties:
         Type: !!robotbuilder.data.properties.ChoicesProperty
@@ -136,7 +136,7 @@ Children:
           validators: &id007 [PWMOutput]
           value: '1'
       Base: Speed Controller
-      Name: Speed Controller Climber
+      Name: Speed Controller Intake
     - Children: []
       Properties:
         Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
