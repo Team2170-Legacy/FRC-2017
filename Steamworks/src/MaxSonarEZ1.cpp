@@ -16,11 +16,11 @@ MaxSonarEZ1::MaxSonarEZ1(std::shared_ptr<AnalogInput> AI) {
 	sensor->SetAverageBits(4);
 }
 
-float MaxSonarEZ1::GetRangeInches() {
+double MaxSonarEZ1::GetRangeInches() {
 	return (sensor->GetAverageVoltage() * INCHES_PER_VOLT);
 }
 
-float MaxSonarEZ1::GetRangeMM() {
+double MaxSonarEZ1::GetRangeMM() {
 	return (GetRangeInches() * MM_PER_INCH);
 }
 

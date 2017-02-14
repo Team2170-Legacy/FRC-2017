@@ -30,8 +30,8 @@ class DriveTrain: public Subsystem {
 private:
 	const unsigned short int kCountsPerRev;	// 360 count encoder, x4 sampling
 	const double kDefaultVoltageRamp;
-	float mAutoVelocity = 0.5;
-	float mYawGain = -0.10;
+	double mAutoVelocity = 0.5;
+	double mYawGain = -0.10;
 	bool bDriveStraight = false;
 
 	bool mMotionProcessingActive = false;
@@ -87,17 +87,17 @@ public:
 	void SetChassisMode(CANTalon::TalonControlMode mode);
 	double GetChassisPosition();
 
-	void ArcadeDriveWithJoysticks(float moveVal, float rotateVal);
-	void TankDriveWithTriggers(float Left, float Right, float Trigger);
+	void ArcadeDriveWithJoysticks(double moveVal, double rotateVal);
+	void TankDriveWithTriggers(double Left, double Right, double Trigger);
 	void TankDrive(float Left, float Right);
 	void DriveStraight(bool Backwards = false);
-	void DriveStraight(float magnitude);
+	void DriveStraight(double magnitude);
 
 	void Rotate(float position);
 
 	void ResetChassisYaw();
-	float ReadChassisYaw();
-	float ReadChassisDistance();
+	double ReadChassisYaw();
+	double ReadChassisDistance();
 	void StopMotors();
 	void SetBrakeMode( CANSpeedController::NeutralMode);
 	void SetMotionProfileState(CANTalon::SetValueMotionProfile mode);
@@ -106,7 +106,7 @@ public:
 
 	const double InchesPerRotation;
 
-	void setAutoVelocity(float autoVelocity = 0.5) {
+	void setAutoVelocity(double autoVelocity = 0.5) {
 		mAutoVelocity = autoVelocity;
 	}
 

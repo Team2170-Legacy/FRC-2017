@@ -55,7 +55,7 @@ void DriveTrain::InitDefaultCommand() {
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
-void DriveTrain::ArcadeDriveWithJoysticks(float moveVal, float rotateVal) {
+void DriveTrain::ArcadeDriveWithJoysticks(double moveVal, double rotateVal) {
 	robotDrive->ArcadeDrive(moveVal, rotateVal, true);
 }
 
@@ -65,7 +65,7 @@ void DriveTrain::ResetChassisYaw() {
 	}
 }
 
-float DriveTrain::ReadChassisYaw() {
+double DriveTrain::ReadChassisYaw() {
 	double result = 0.0;
 	result = gyro->GetAngle();
 
@@ -80,9 +80,9 @@ void DriveTrain::DriveStraight(bool Backwards) {
 	}
 }
 
-void DriveTrain::DriveStraight(float magnitude) {
+void DriveTrain::DriveStraight(double magnitude) {
 
-		float ChassisAngle = ReadChassisYaw();
+		double ChassisAngle = ReadChassisYaw();
 
 		if (magnitude > 0.0) {
 			robotDrive->Drive(magnitude, mYawGain * ChassisAngle);
@@ -107,11 +107,11 @@ void DriveTrain::SetVoltagePercentMode() {
 
 }
 
-void DriveTrain::TankDriveWithTriggers(float Left, float Right, float Trigger) {
+void DriveTrain::TankDriveWithTriggers(double Left, double Right, double Trigger) {
 	double newLeft = 0.0;
  	double newRight = 0.0;
- 	float ProcessedLeft = Left;
- 	float ProcessedRight = Right;
+ 	double ProcessedLeft = Left;
+ 	double ProcessedRight = Right;
  	double fExponent = 1.0;
 
  	ProcessedLeft = DEADBAND(AxisPower(ProcessedLeft, fExponent), 0.07);
@@ -173,7 +173,7 @@ void DriveTrain::SetMotionProfileMode() {
 	SetRampRate(0.0);
 }
 
-float DriveTrain::ReadChassisDistance() {
+double DriveTrain::ReadChassisDistance() {
 	return(FrontSonar->GetRangeInches());
 }
 
@@ -413,6 +413,9 @@ void DriveTrain::InitTalons(void) {
 
 	cANTalonLeft->SetSensorDirection(prefs->GetBoolean("SensorDirection", false)); //changed this
 	cANTalonRight->SetSensorDirection(prefs->GetBoolean("SensorDirection", true));
+
+	cANTalonLeft->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateFeedback, 10);
+	cANTalonRight->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateFeedback, 10);
 
 	SetMotorGains();
 	SetBrakeMode(CANTalon::NeutralMode::kNeutralMode_Coast);

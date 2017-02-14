@@ -18,7 +18,7 @@ Xbox360::Xbox360(std::shared_ptr<Joystick> NewJoystick)
  * 
  * @return The value of the axis from -1 to 1.
  */
-float Xbox360::GetLeftX() {
+double Xbox360::GetLeftX() {
 	return (mJoystick->GetRawAxis(0));
 }
 
@@ -28,7 +28,7 @@ float Xbox360::GetLeftX() {
  * 
  * @return The value of the axis from -1 to 1.
  */
-float Xbox360::GetLeftY() {
+double Xbox360::GetLeftY() {
 	return (-1.0 * mJoystick->GetRawAxis(1)); //Multiply output by -1 because GetAxis() returns the axis backwards.
 }
 
@@ -38,7 +38,7 @@ float Xbox360::GetLeftY() {
  * 
  * @return The value of the axis from -1 to 1.
  */
-float Xbox360::GetRightX() {
+double Xbox360::GetRightX() {
 	return (mJoystick->GetRawAxis(4));
 }
 
@@ -48,7 +48,7 @@ float Xbox360::GetRightX() {
  * 
  * @return The value of the axis from -1 to 1.
  */
-float Xbox360::GetRightY() {
+double Xbox360::GetRightY() {
 	return (-1.0 * mJoystick->GetRawAxis(5));
 }
 
@@ -58,8 +58,8 @@ float Xbox360::GetRightY() {
  * 
  * @return The value corresponding to the triggers.
  */
-float Xbox360::GetTriggers() {
-	float Triggervalue =  (-1 * mJoystick->GetRawAxis(2) + mJoystick->GetRawAxis(3));
+double Xbox360::GetTriggers() {
+	double Triggervalue =  (-1 * mJoystick->GetRawAxis(2) + mJoystick->GetRawAxis(3));
 	return Triggervalue;
 }
 
@@ -176,7 +176,7 @@ bool Xbox360::GetRawButton(unsigned int button) {
  * @param axis The axis to get the value of. Range 1-6.
  * @return The value of the axis from -1 to 1.
  */
-float Xbox360::GetRawAxis(unsigned int axis) {
+double Xbox360::GetRawAxis(unsigned int axis) {
 	return (mJoystick->GetRawAxis(axis));
 }
 
