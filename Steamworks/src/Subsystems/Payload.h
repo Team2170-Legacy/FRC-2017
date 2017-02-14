@@ -111,6 +111,7 @@ public:
 	};
 	void SlewElevator(ElevatorDir direction);
 	bool HomeSwitchActive();
+	void ZeroElevatorPosition();
 
 private:
 	LoopMode mCurrentMode = LoopMode::kOpenLoop;

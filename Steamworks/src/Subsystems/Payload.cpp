@@ -181,6 +181,10 @@ bool Payload::HomeSwitchActive() {
 bool Payload::IsDoorOpen() {
 	return DoorOpen;
 }
+
+void Payload::ZeroElevatorPosition() {
+	cANTalonElevator->SetPosition(0.0);
+}
 // Put methods for controlling this
 // here. Call these from Commands.
 
