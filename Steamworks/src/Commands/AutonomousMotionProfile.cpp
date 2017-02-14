@@ -50,7 +50,7 @@ void AutonomousMotionProfile::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void AutonomousMotionProfile::Execute() {
-
+	Robot::driveTrain->TelemetryUpdate();
 }
 
 // Make this return true when this Command no longer needs to run execute()

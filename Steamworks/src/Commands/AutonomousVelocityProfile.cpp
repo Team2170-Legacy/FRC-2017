@@ -36,6 +36,7 @@ void AutonomousVelocityProfile::Execute() {
 		ErrorValue = *(double*)ErrorSource;
 	}
 	Robot::driveTrain->SetChassisVelocity(*it, ErrorValue);
+	Robot::driveTrain->TelemetryUpdate();
 }
 
 // Make this return true when this Command no longer needs to run execute()

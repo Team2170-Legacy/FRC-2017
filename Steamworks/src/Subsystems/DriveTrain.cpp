@@ -302,9 +302,6 @@ void DriveTrain::FillProfileBuffer(std::shared_ptr<const ProfileData> LeftWheel,
 void  DriveTrain::ServiceMotionProfile() {
 	cANTalonLeft->ProcessMotionProfileBuffer();
 	cANTalonRight->ProcessMotionProfileBuffer();
-
-	RightLog->Update();
-	LeftLog->Update();
 }
 
 void DriveTrain::SetBrakeMode(CANTalon::NeutralMode Mode) {
@@ -446,4 +443,9 @@ void DriveTrain::TankDrive(float Left, float Right) {
 void DriveTrain::TelemetryFlush() {
 	LeftLog->Flush();
 	RightLog->Flush();
+}
+
+void DriveTrain::TelemetryUpdate() {
+	RightLog->Update();
+	LeftLog->Update();
 }
