@@ -1,0 +1,16 @@
+[NetworkTables Storage 3.0]
+double "/Preferences/ClimberFastSpeed"=0.75
+double "/Preferences/ClimberSlowSpeed"=0.5
+double "/Preferences/DumperSpeed"=1
+double "/Preferences/ElevHomeSpeed"=0.25
+double "/Preferences/ElevSlewDeltaPos"=10
+double "/Preferences/ElevSlewSpeed"=0.3
+double "/Preferences/ElevatorMaxPos"=10000
+double "/Preferences/ElevatorOpenLoopDn"=-0.5
+double "/Preferences/ElevatorOpenLoopUp"=0.5
+double "/Preferences/IntakeSpeed"=1
+double "/Preferences/PayloadDoorClosePos"=0
+double "/Preferences/PayloadDoorOpenPos"=1
+double "/Preferences/VoltageRamp"=27
+double "/Preferences/WheelCountPerRev"=360
+double "/Preferences/WheelDiameter"=4
