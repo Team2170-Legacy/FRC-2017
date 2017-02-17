@@ -31,7 +31,7 @@ private:
 	const unsigned short int kCountsPerRev;	// 360 count encoder, x4 sampling
 	const double kDefaultVoltageRamp;
 	double mAutoVelocity = 0.5;
-	double mYawGain = -0.10;
+	double kYawGain = -0.10;
 	bool bDriveStraight = false;
 
 	bool mMotionProcessingActive = false;
