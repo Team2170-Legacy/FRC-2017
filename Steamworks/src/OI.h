@@ -23,6 +23,7 @@ private:
 	std::shared_ptr<JoystickButton> supportJoystickButtonB;
 	std::shared_ptr<JoystickButton> supportJoystickButtonA;
 	std::shared_ptr<Joystick> driverJoystick;
+	std::shared_ptr<JoystickButton> driverLeftStickClick;
 	std::shared_ptr<JoystickButton> dirverJoystickButtonY;
 	std::shared_ptr<JoystickButton> driverJoystickButtonX;
 	std::shared_ptr<JoystickButton> driverJoystickButtonB;

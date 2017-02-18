@@ -87,6 +87,9 @@ void DriveTrain::DriveStraight(double magnitude) {
 
 		double ChassisAngle = ReadChassisYaw();
 
+		if (mReverseDrive) {
+			magnitude = -magnitude;
+		}
 		if (magnitude > 0.0) {
 			robotDrive->Drive(magnitude, kYawGain * ChassisAngle);
 		}
@@ -134,7 +137,12 @@ void DriveTrain::TankDriveWithTriggers(double Left, double Right, double Trigger
  	}
  	else {
  		bDriveStraight = false;
- 		robotDrive->TankDrive(newLeft, newRight, true);
+ 		if (!mReverseDrive) {
+ 			robotDrive->TankDrive(newLeft, newRight, true);
+ 		}
+ 		else {
+ 			robotDrive->TankDrive(-newRight, -newLeft, true);
+ 		}
  	}
     cANTalonSlaveRight->Set(2);
     cANTalonSlaveLeft->Set(1);

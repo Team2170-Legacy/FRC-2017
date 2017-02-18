@@ -41,6 +41,7 @@ private:
 	const double kElevatorStopSpeed=0.0;
 	const double kClimberSpeedSlow;
 	const double kClimberSpeedFast;
+	const double kIntakeElevatorMaxPos;
 	const double kClimberSpeedStop=0.0;
 	const double kElevatorHomeSpeed=0.5;
 

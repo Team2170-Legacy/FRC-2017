@@ -22,6 +22,8 @@
 #include "Commands/BackDoorOpen.h"
 #include "Commands/BackDoorToggle.h"
 #include "Commands/ClimberUp.h"
+#include "Commands/DriveTrainToggleDirection.h"
+#include "Commands/DumperHighLoadWhileHeld.h"
 #include "Commands/DumperOff.h"
 #include "Commands/DumperOn.h"
 #include "Commands/DumperOnWhileHeld.h"
@@ -49,13 +51,15 @@ OI::OI() {
     supportJoystickButtonY.reset(new JoystickButton(supportJoystick.get(), 4));
     supportJoystickButtonY->WhileHeld(new ClimberUp());
     supportJoystickButtonX.reset(new JoystickButton(supportJoystick.get(), 3));
-    supportJoystickButtonX->WhenPressed(new BackDoorToggle());
+    supportJoystickButtonX->WhenPressed(new IntakeToggle());
     supportJoystickButtonB.reset(new JoystickButton(supportJoystick.get(), 2));
-    supportJoystickButtonB->WhileHeld(new ClimberUp());
+    supportJoystickButtonB->WhileHeld(new DumperHighLoadWhileHeld());
     supportJoystickButtonA.reset(new JoystickButton(supportJoystick.get(), 1));
-    supportJoystickButtonA->WhileHeld(new ClimberUp());
+    supportJoystickButtonA->WhileHeld(new DumperOnWhileHeld());
     driverJoystick.reset(new Joystick(0));
     
+    driverLeftStickClick.reset(new JoystickButton(driverJoystick.get(), 9));
+    driverLeftStickClick->WhenPressed(new DriveTrainToggleDirection());
     dirverJoystickButtonY.reset(new JoystickButton(driverJoystick.get(), 4));
     dirverJoystickButtonY->WhileHeld(new ClimberUp());
     driverJoystickButtonX.reset(new JoystickButton(driverJoystick.get(), 3));
@@ -66,6 +70,7 @@ OI::OI() {
     driverJoystickButtonA->WhenPressed(new IntakeToggle());
 
     // SmartDashboard Buttons
+    SmartDashboard::PutData("Dumper High Load While Held", new DumperHighLoadWhileHeld());
     SmartDashboard::PutData("Elevator Initialize", new ElevatorInitialize());
     SmartDashboard::PutData("Autonomous Test Group", new AutonomousTestGroup());
     SmartDashboard::PutData("Autonomous Command", new AutonomousCommand());

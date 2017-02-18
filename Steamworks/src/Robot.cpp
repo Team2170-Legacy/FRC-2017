@@ -62,6 +62,7 @@ void Robot::DisabledInit(){
 }
 
 void Robot::DisabledPeriodic() {
+	UpdateSmartDash();
 	Scheduler::GetInstance()->Run();
 }
 
@@ -87,9 +88,7 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
-	SmartDashboard::PutBoolean("Intake Running", payload->IsIntakeRunning());
-	SmartDashboard::PutBoolean("Dumper Running", dumper->IsDumperMoving());
-	SmartDashboard::PutBoolean("DoorOpen", payload->IsDoorOpen());
+	UpdateSmartDash();
 	Scheduler::GetInstance()->Run();
 }
 
@@ -99,3 +98,10 @@ void Robot::TestPeriodic() {
 
 START_ROBOT_CLASS(Robot);
 
+void Robot::UpdateSmartDash() {
+	SmartDashboard::PutBoolean("Intake Running", payload->IsIntakeRunning());
+	SmartDashboard::PutBoolean("Dumper Running", dumper->IsDumperMoving());
+	SmartDashboard::PutBoolean("DoorOpen", payload->IsDoorOpen());
+	SmartDashboard::PutBoolean("Drive Reverse", driveTrain->isReverseDrive());
+	SmartDashboard::PutNumber("Elevator Position", payload->GetElevatorPosition());
+}

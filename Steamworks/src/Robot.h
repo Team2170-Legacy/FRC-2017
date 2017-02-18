@@ -47,6 +47,8 @@ public:
 	virtual void TeleopPeriodic();
 	virtual void TestPeriodic();
 
+	void UpdateSmartDash();
+
 	frc::SendableChooser<frc::Command*> chooser;
 };
 #endif
