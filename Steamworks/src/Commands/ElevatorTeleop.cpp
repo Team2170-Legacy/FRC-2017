@@ -32,7 +32,7 @@ void ElevatorTeleop::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void ElevatorTeleop::Execute() {
 	double Input = mSupportControl->GetLeftY();
-	const double dbLimit = 0.1;
+	const double dbLimit = 0.25;
 
 	if (Input > dbLimit) {
 		Robot::payload->SlewElevator(Payload::ElevatorDir::kSlewUp);
