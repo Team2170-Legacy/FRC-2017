@@ -37,6 +37,7 @@ private:
 	const double kElevatorClosedLoopUpSpeed=0.5;
 	const double kElevatorClosedLoopDownSpeed=-0.5;
 	const double kElevatorMaxPosition;
+	const double kElevatorMinPosition;
 	const double kElevatorStopSpeed=0.0;
 	const double kClimberSpeedSlow;
 	const double kClimberSpeedFast;
@@ -112,6 +113,7 @@ public:
 	void SlewElevator(ElevatorDir direction);
 	bool HomeSwitchActive();
 	void ZeroElevatorPosition();
+	double GetElevatorPosition();
 
 private:
 	LoopMode mCurrentMode = LoopMode::kOpenLoop;

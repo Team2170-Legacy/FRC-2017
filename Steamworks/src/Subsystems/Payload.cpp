@@ -30,6 +30,7 @@ kDoorClosePosition(Preferences::GetInstance()->GetDouble("PayloadDoorClosePos", 
 kElevatorOpenLoopUpSpeed(Preferences::GetInstance()->GetDouble("ElevatorOpenLoopUp", 0.5)),
 kElevatorOpenLoopDownSpeed(Preferences::GetInstance()->GetDouble("ElevatorOpenLoopDn", -0.5)),
 kElevatorMaxPosition(Preferences::GetInstance()->GetDouble("ElevatorMaxPos", 10000.0)),
+kElevatorMinPosition(Preferences::GetInstance()->GetDouble("ElevatorMinPos", 1.0)),
 kClimberSpeedSlow(Preferences::GetInstance()->GetDouble("ClimberSlowSpeed", -0.5)),
 kClimberSpeedFast(Preferences::GetInstance()->GetDouble("ClimberFastSpeed", -0.75)),
 kElevatorHomeSpeed(Preferences::GetInstance()->GetDouble("ElevHomeSpeed", 0.25)){
@@ -132,14 +133,24 @@ void Payload::SetElevatorPosition(ElevatorPos position) {
 }
 
 void Payload::SlewElevator(ElevatorDir direction) {
-	double CurrentPosition=cANTalonElevator->GetPosition();
+	double CurrentPosition=GetElevatorPosition();
 	if (mCurrentMode == LoopMode::kOpenLoop) {
 		switch (direction) {
 		case kSlewDown:
-			cANTalonElevator->Set(kElevatorOpenLoopDownSpeed);
+			if (CurrentPosition > kElevatorMinPosition) {
+				cANTalonElevator->Set(kElevatorOpenLoopDownSpeed);
+			}
+			else {
+				cANTalonElevator->Set(kElevatorStopSpeed);
+			}
 			break;
 		case kSlewUp:
-			cANTalonElevator->Set(kElevatorOpenLoopUpSpeed);
+			if (CurrentPosition < kElevatorMaxPosition) {
+				cANTalonElevator->Set(kElevatorOpenLoopUpSpeed);
+			}
+			else {
+				cANTalonElevator->Set(kElevatorStopSpeed);
+			}
 			break;
 		case kSlewStop:
 			cANTalonElevator->Set(kElevatorStopSpeed);
@@ -184,6 +195,10 @@ bool Payload::IsDoorOpen() {
 
 void Payload::ZeroElevatorPosition() {
 	cANTalonElevator->SetPosition(0.0);
+}
+
+double Payload::GetElevatorPosition() {
+	return cANTalonElevator->GetPosition();
 }
 // Put methods for controlling this
 // here. Call these from Commands.
