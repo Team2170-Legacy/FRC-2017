@@ -34,6 +34,8 @@ private:
 	const double kYawGain;
 	const bool kLeftSensorDirection;
 	const bool kRightSensorDirection;
+	const bool kDriveVelocityMode;
+	const double kDriveMaxVelocity;
 	bool bDriveStraight = false;
 
 	bool mMotionProcessingActive = false;

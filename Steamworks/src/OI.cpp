@@ -35,7 +35,9 @@
 #include "Commands/ElevatorTeleop.h"
 #include "Commands/IntakeOff.h"
 #include "Commands/IntakeOn.h"
+#include "Commands/IntakeReverse.h"
 #include "Commands/IntakeToggle.h"
+#include "Commands/IntakeToggleReverse.h"
 #include "Commands/TankDriveTeleop.h"
 #include "Commands/TeleopDrive.h"
 #include "Commands/ZeroElevatorEncoder.h"
@@ -49,7 +51,7 @@ OI::OI() {
     supportJoystick.reset(new Joystick(1));
     
     supportJoystickButtonY.reset(new JoystickButton(supportJoystick.get(), 4));
-    supportJoystickButtonY->WhileHeld(new ClimberUp());
+    supportJoystickButtonY->WhenPressed(new IntakeToggleReverse());
     supportJoystickButtonX.reset(new JoystickButton(supportJoystick.get(), 3));
     supportJoystickButtonX->WhenPressed(new IntakeToggle());
     supportJoystickButtonB.reset(new JoystickButton(supportJoystick.get(), 2));
@@ -64,10 +66,6 @@ OI::OI() {
     dirverJoystickButtonY->WhileHeld(new ClimberUp());
     driverJoystickButtonX.reset(new JoystickButton(driverJoystick.get(), 3));
     driverJoystickButtonX->WhenPressed(new BackDoorToggle());
-    driverJoystickButtonB.reset(new JoystickButton(driverJoystick.get(), 2));
-    driverJoystickButtonB->WhenPressed(new DumperToggle());
-    driverJoystickButtonA.reset(new JoystickButton(driverJoystick.get(), 1));
-    driverJoystickButtonA->WhenPressed(new IntakeToggle());
 
     // SmartDashboard Buttons
     SmartDashboard::PutData("Dumper High Load While Held", new DumperHighLoadWhileHeld());
