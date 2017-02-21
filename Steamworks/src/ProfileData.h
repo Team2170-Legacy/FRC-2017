@@ -10,9 +10,6 @@
 
 typedef std::vector<std::array<double, 3>> ProfileData;
 
-extern const ProfileData TestData;
-extern const ProfileData TestData2;
-
 // 45 degrees clockwise
 extern const ProfileData Rotate45Clockwise;
 
