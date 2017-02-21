@@ -1,4 +1,5 @@
 #include "GearTwoNEW.h"
+#include "Vision_Calibration.h"
 
 namespace grip {
 
@@ -11,9 +12,10 @@ void GearTwoNEW::Process(cv::Mat& source0){
 	//Step HSL_Threshold0:
 	//input
 	cv::Mat hslThresholdInput = source0;
-	double hslThresholdHue[] = {66.36690647482014, 107.27272727272728};
-	double hslThresholdSaturation[] = {197.21223021582733, 255.0};
-	double hslThresholdLuminance[] = {25.22482014388489, 98.3080808080808};
+	//double hslThresholdHue[] = {66.36690647482014, 107.27272727272728};
+	double hslThresholdHue[] = {Hmin, Hmax};
+	double hslThresholdSaturation[] = {Smin, Smax};
+	double hslThresholdLuminance[] = {Lmin, Lmax};
 	hslThreshold(hslThresholdInput, hslThresholdHue, hslThresholdSaturation, hslThresholdLuminance, this->hslThresholdOutput);
 	//Step Find_Contours0:
 	//input
@@ -25,9 +27,9 @@ void GearTwoNEW::Process(cv::Mat& source0){
 	std::vector<std::vector<cv::Point> > filterContoursContours = findContoursOutput;
 	double filterContoursMinArea = 1.0;  // default Double
 	double filterContoursMinPerimeter = 0.0;  // default Double
-	double filterContoursMinWidth = 10.0;  // default Double
+	double filterContoursMinWidth = MinWidth;  // default Double
 	double filterContoursMaxWidth = 1000.0;  // default Double
-	double filterContoursMinHeight = 0.0;  // default Double
+	double filterContoursMinHeight = MinHeight;  // default Double
 	double filterContoursMaxHeight = 1000.0;  // default Double
 	double filterContoursSolidity[] = {0.0, 100};
 	double filterContoursMaxVertices = 1000000.0;  // default Double
