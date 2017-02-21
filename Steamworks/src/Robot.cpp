@@ -47,6 +47,7 @@ void Robot::RobotInit() {
 	chooser.AddDefault("Auto Testing - Don't choose in match!!", new (AutonomousTestGroup));
 	SmartDashboard::PutData("Autonomous Modes", &chooser);
 
+	CameraServer::GetInstance()->StartAutomaticCapture();
   }
 
 /**
