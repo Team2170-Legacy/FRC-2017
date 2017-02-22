@@ -39,6 +39,7 @@ void ElevatorHome::Execute() {
 bool ElevatorHome::IsFinished() {
 	double NewPos = Robot::payload->GetElevatorPosition();
 	double DeltaPos = NewPos - mLastPosition;
+	mLastPosition = NewPos;
     return (DeltaPos <= kHomeRange);
 }
 
