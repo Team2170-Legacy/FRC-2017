@@ -19,8 +19,8 @@ private:
 public:
 	MaxSonarEZ1();
 	MaxSonarEZ1(std::shared_ptr<AnalogInput> AI);
-	float GetRangeInches();
-	float GetRangeMM();
+	double GetRangeInches();
+	double GetRangeMM();
 	virtual ~MaxSonarEZ1();
 };
 
