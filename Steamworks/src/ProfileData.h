@@ -31,6 +31,9 @@ extern const ProfileData Rotate180CounterClockwise;
 // 9.5' forward
 extern const ProfileData AutonomousMoveToBaseline;
 
+// 63.3" backward toward gear peg
+extern const ProfileData AutonomousMoveToGearPeg;
+
 // 60 degrees clockwise
 extern const ProfileData Rotate60Clockwise;
 
