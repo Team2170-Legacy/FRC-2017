@@ -27,19 +27,23 @@ kHomeRange(Preferences::GetInstance()->GetDouble("ElevHomeRange", 0.1)){
 void ElevatorHome::Initialize() {
 	Robot::payload->SetElevatorMode(Payload::LoopMode::kOpenLoop);
 	mLastPosition = Robot::payload->GetElevatorPosition();
+	printf("Elevator Home\n");
 
 }
 
 // Called repeatedly when this Command is scheduled to run
 void ElevatorHome::Execute() {
 	Robot::payload->SlewElevator(Payload::ElevatorDir::kSlewHome);
+	printf("Elevator Home\n");
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool ElevatorHome::IsFinished() {
 	double NewPos = Robot::payload->GetElevatorPosition();
-	double DeltaPos = NewPos - mLastPosition;
-    return (DeltaPos <= kHomeRange);
+	double DeltaPos = mLastPosition - NewPos;
+
+	mLastPosition = NewPos;
+	return (DeltaPos <= kHomeRange);
 }
 
 // Called once after isFinished returns true

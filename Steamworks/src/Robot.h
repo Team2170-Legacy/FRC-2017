@@ -33,7 +33,7 @@ class Robot : public IterativeRobot {
 private:
 	static void VisionThread();
 	static void VisionThreadBBoiler();
-
+	bool mVisionEnabled;
 public:
 	std::unique_ptr<Command> autonomousCommand;
 	static std::unique_ptr<OI> oi;
@@ -65,6 +65,10 @@ public:
 	virtual void TestPeriodic();
 
 	void UpdateSmartDash();
+
+	bool isVisionEnabled() const {
+		return mVisionEnabled;
+	}
 
 	frc::SendableChooser<frc::Command*> chooser;
 };
