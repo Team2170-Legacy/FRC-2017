@@ -35,14 +35,20 @@ void Robot::VisionThread() {
 	int* status_ptr = &status;
 
 	cs::UsbCamera camera = CameraServer::GetInstance()->StartAutomaticCapture(0);
+	usleep(1000000);
 	camera.SetResolution(320, 240);
+	usleep(1000000);
 	//double exposure =
-	camera.SetExposureManual(17);
-	//usleep(1000000);
+	camera.SetExposureManual(9);
+	usleep(1000000);
 
 //	cs::CvSink cvSink = CameraServer::GetInstance()->GetVideo();
 	cs::CvSink cvSink = CameraServer::GetInstance()->GetVideo("USB Camera 0");
+	usleep(1000000);
+
 	cs::CvSource outputStreamStd = CameraServer::GetInstance()->PutVideo("Cam0", 320, 240);
+	usleep(1000000);
+
 
 	cv::Mat source;
 	cv::Mat output;
@@ -70,35 +76,51 @@ void Robot::VisionThread() {
 		output = source;
 
 		if (!contours.empty())
+//		if (false)
 		{
-			contour1 = contours[0];
-			contour2 = contours[1];
-			r1 = cv::boundingRect(contour1);
-			r2 = cv::boundingRect(contour2);
-			cv::Point tl1 = r1.tl();	//Rect_::x and Rect_::y
-			cv::Point br1 = r1.br();
-			cv::Point tl2 = r2.tl();	//Rect_::x and Rect_::y
-			cv::Point br2 = r2.br();
+			if (contours.size() >= 2)
+			{
+				contour1 = contours[0];
+				contour2 = contours[1];
+				r1 = cv::boundingRect(contour1);
+				r2 = cv::boundingRect(contour2);
+				cv::Point tl1 = r1.tl();	//Rect_::x and Rect_::y
+				cv::Point br1 = r1.br();
+				cv::Point tl2 = r2.tl();	//Rect_::x and Rect_::y
+				cv::Point br2 = r2.br();
 
-			cv::Scalar color = cv::Scalar(180,105,255); // BGR for hot pink color
-			cv::rectangle(output, tl1, br1, color, 4, 8, 0);
-			cv::rectangle(output, tl2, br2, color, 4, 8, 0);
+				cv::Scalar color = cv::Scalar(180,105,255); // BGR for hot pink color
+				cv::rectangle(output, tl1, br1, color, 4, 8, 0);
+				cv::rectangle(output, tl2, br2, color, 4, 8, 0);
 
-			int midpt_r1 [2] = {(tl1.x + br1.x) / 2, (tl1.y + br1.y) / 2};
-			int midpt_r2 [2] = {(tl2.x + br2.x) / 2, (tl2.y + br2.y) / 2};
-			int gear [2] = {(midpt_r1 [0] + midpt_r2 [0]) / 2, (midpt_r1 [1] + midpt_r2 [1]) / 2};
+				int midpt_r1 [2] = {(tl1.x + br1.x) / 2, (tl1.y + br1.y) / 2};
+				int midpt_r2 [2] = {(tl2.x + br2.x) / 2, (tl2.y + br2.y) / 2};
+				int gear [2] = {(midpt_r1 [0] + midpt_r2 [0]) / 2, (midpt_r1 [1] + midpt_r2 [1]) / 2};
 
-			cv::Point gear_midpoint( gear[0], gear[1]);
-			cv::line(output, gear_midpoint, gear_midpoint, color, 4);
+				cv::Point gear_midpoint( gear[0], gear[1]);
+				cv::line(output, gear_midpoint, gear_midpoint, color, 4);
 
-			Gear_x = gear[0];			// Transfer Gear Target x-location to other threads & Robot command functions
-			e_Gear_x = Gear_x - 160;	// Define error in Gear_x location
+				Gear_x = gear[0];			// Transfer Gear Target x-location to other threads & Robot command functions
+				e_Gear_x = Gear_x - 160;	// Define error in Gear_x location
 
-//			std::cout << "Midpoint of Rectangle 1: (" << midpt_r1 [0] << "," << midpt_r1 [1] << ")" << std::endl;
-//			std::cout << "Midpoint of Rectangle 2: (" << midpt_r2 [0] << "," << midpt_r2 [1] << ")" << std::endl;
-//			std::cout << "Gear Location: (" << gear [0] << "," << gear [1] << ")" << std::endl;
+	//			std::cout << "Midpoint of Rectangle 1: (" << midpt_r1 [0] << "," << midpt_r1 [1] << ")" << std::endl;
+	//			std::cout << "Midpoint of Rectangle 2: (" << midpt_r2 [0] << "," << midpt_r2 [1] << ")" << std::endl;
+	//			std::cout << "Gear Location: (" << gear [0] << "," << gear [1] << ")" << std::endl;
+			} // if (size(contours) >= 2)
+			else
+			{
+				e_Gear_x = 0;
+			}
 
 		} // if (!contours.empty())
+		else
+		{
+			cv::Scalar color = cv::Scalar(180,105,255); // BGR for hot pink color
+			cv::Point P1( 100, 100);
+			cv::Point P2( 200, 200);
+			cv::line(output, P1, P2, color, 4);
+			e_Gear_x = 22;
+		}
 		outputStreamStd.PutFrame(output);
 	} // while(true)
 }; //void Robot::VisionThread()
