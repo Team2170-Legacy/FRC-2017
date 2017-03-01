@@ -46,12 +46,12 @@ void Robot::VisionThread() {
 	cs::CvSink cvSink = CameraServer::GetInstance()->GetVideo("USB Camera 0");
 	usleep(1000000);
 
-	cs::CvSource outputStreamStd = CameraServer::GetInstance()->PutVideo("Cam0", 320, 240);
-	usleep(1000000);
+//*	cs::CvSource outputStreamStd = CameraServer::GetInstance()->PutVideo("Cam0", 320, 240);
+//*	usleep(1000000);
 
 
 	cv::Mat source;
-	cv::Mat output;
+//*	cv::Mat output;
 
 	grip::GearTwoNEW GearPipeline;
 
@@ -66,6 +66,7 @@ void Robot::VisionThread() {
 	while(true) {
 
 		cvSink.GrabFrame(source);
+		usleep(0100000);
 
 		GearPipeline.Process(source);
 
@@ -73,7 +74,7 @@ void Robot::VisionThread() {
 		contours = *contours_ptr;
 
 //		cvtColor(source, output, cv::COLOR_BGR2RGB);
-		output = source;
+//*		output = source;
 
 		if (!contours.empty())
 //		if (false)
@@ -90,15 +91,15 @@ void Robot::VisionThread() {
 				cv::Point br2 = r2.br();
 
 				cv::Scalar color = cv::Scalar(180,105,255); // BGR for hot pink color
-				cv::rectangle(output, tl1, br1, color, 4, 8, 0);
-				cv::rectangle(output, tl2, br2, color, 4, 8, 0);
+//*				cv::rectangle(output, tl1, br1, color, 4, 8, 0);
+//*				cv::rectangle(output, tl2, br2, color, 4, 8, 0);
 
 				int midpt_r1 [2] = {(tl1.x + br1.x) / 2, (tl1.y + br1.y) / 2};
 				int midpt_r2 [2] = {(tl2.x + br2.x) / 2, (tl2.y + br2.y) / 2};
 				int gear [2] = {(midpt_r1 [0] + midpt_r2 [0]) / 2, (midpt_r1 [1] + midpt_r2 [1]) / 2};
 
 				cv::Point gear_midpoint( gear[0], gear[1]);
-				cv::line(output, gear_midpoint, gear_midpoint, color, 4);
+//*				cv::line(output, gear_midpoint, gear_midpoint, color, 4);
 
 				Gear_x = gear[0];			// Transfer Gear Target x-location to other threads & Robot command functions
 				e_Gear_x = Gear_x - 160;	// Define error in Gear_x location
@@ -116,12 +117,14 @@ void Robot::VisionThread() {
 		else
 		{
 			cv::Scalar color = cv::Scalar(180,105,255); // BGR for hot pink color
-			cv::Point P1( 100, 100);
-			cv::Point P2( 200, 200);
-			cv::line(output, P1, P2, color, 4);
+
+			cv::Point P1( 300, 220);
+			cv::Point P2( 310, 230);
+//*			cv::line(output, P1, P2, color, 4);
 			e_Gear_x = 22;
 		}
-		outputStreamStd.PutFrame(output);
+//*		outputStreamStd.PutFrame(output);
+//		usleep(0100000);
 	} // while(true)
 }; //void Robot::VisionThread()
 
@@ -164,8 +167,8 @@ void Robot::VisionThreadBBoiler() {
 
 		cv::Scalar color2 = cv::Scalar(0,0,255); // BGR for red
 
-		cv::Point r1tl = cv::Point(100, 100);
-		cv::Point r1br = cv::Point(200, 200);
+		cv::Point r1tl = cv::Point(300, 220);
+		cv::Point r1br = cv::Point(320, 240);
 		cv::rectangle(output, r1tl, r1br, color2, 4, 8, 0);
 
 		if (!contours.empty())
