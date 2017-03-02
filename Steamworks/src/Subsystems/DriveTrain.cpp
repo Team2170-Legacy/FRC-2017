@@ -129,16 +129,26 @@ void DriveTrain::TankDriveWithTriggers(double Left, double Right, double Trigger
  	newLeft = fmax(fmin(ProcessedLeft + (Trigger * .8), 1.0), -1.0);
  	newRight = fmax(fmin(ProcessedRight + (Trigger * .8), 1.0), -1.0);
 
+ 	// Select velocity mode or throttle mode
  	if (kDriveVelocityMode) {
  		SetChassisMode(CANTalon::TalonControlMode::kSpeedMode);
  	}
+ 	else {
+ 		SetChassisMode(CANTalon::TalonControlMode::kThrottleMode);
+ 	}
 
+ 	// Determine if we are using gyro corrected straight movement
  	if ((ProcessedLeft == 0.0) && (ProcessedRight == 0.0)) {
- 		if (!bDriveStraight || DEADBAND(Trigger, 0.15) == 0) {
+ 		if (DEADBAND(Trigger, 0.10) == 0.0) {
  			ResetChassisYaw();
- 			bDriveStraight = false;
+ 			bDriveStraight = true;
  		}
- 		bDriveStraight = true;
+ 	}
+ 	else {
+ 		bDriveStraight = false;
+ 	}
+
+ 	if (bDriveStraight) {
  		if (kDriveVelocityMode) {
  			Trigger *= kDriveMaxVelocity;
  	 		printf("Speed: %f    Error:  %d\n", Trigger,
@@ -147,7 +157,6 @@ void DriveTrain::TankDriveWithTriggers(double Left, double Right, double Trigger
  		DriveStraight(Trigger * 0.8f);
  	}
  	else {
- 		bDriveStraight = false;
  	 	if (kDriveVelocityMode) {
  	 		newLeft *= kDriveMaxVelocity;
  	 		newRight *= kDriveMaxVelocity;
