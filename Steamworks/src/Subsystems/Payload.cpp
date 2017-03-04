@@ -172,7 +172,7 @@ void Payload::SlewElevator(ElevatorDir direction) {
 			cANTalonElevator->Set(kElevatorHomeSpeed);
 			break;
 		case kSlewOffHome:
-			cANTalonElevator->Set(-kElevatorHomeSpeed);
+			cANTalonElevator->Set(-kElevatorHomeSpeed / 2.0);
 			break;
 		}
 	} else if (mCurrentMode == LoopMode::kClosedLoop) {
