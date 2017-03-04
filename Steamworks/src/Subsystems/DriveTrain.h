@@ -130,6 +130,10 @@ public:
 	void setReverseDrive(bool reverseDrive = false) {
 		mReverseDrive = reverseDrive;
 	}
+
+	bool isDriveStraight() const {
+		return bDriveStraight;
+	}
 };
 
 #endif

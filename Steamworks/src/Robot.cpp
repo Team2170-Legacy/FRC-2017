@@ -50,7 +50,7 @@ void Robot::RobotInit() {
 	//Adds a sendable chooser
 	chooser.AddObject("Autonomous", new (AutonomousCommand));
 	chooser.AddObject("Auto Testing - Don't choose in match!!", new (AutonomousTestGroup));
-	chooser.AddObject("MoveToGearBaseline",
+	chooser.AddObject("MoveToBaseline",
 			new AutonomousInitGroup(&AutonomousMoveToBaseline));
 	chooser.AddDefault("MoveToGearPeg",
 			new AutonomousInitGroup(&AutonomousMoveToGearPeg));
@@ -114,4 +114,5 @@ void Robot::UpdateSmartDash() {
 	SmartDashboard::PutBoolean("DoorOpen", payload->IsDoorOpen());
 	SmartDashboard::PutBoolean("Drive Reverse", driveTrain->isReverseDrive());
 	SmartDashboard::PutNumber("Elevator Position", payload->GetElevatorPosition());
+	SmartDashboard::PutBoolean("Gyro Active", driveTrain->isDriveStraight());
 }
