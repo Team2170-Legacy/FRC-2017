@@ -80,7 +80,7 @@ Children:
         validators: null
         value: []
       Default Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
-        name: Default Command, type: Command, validators: null, value: Tank Drive Teleop}
+        name: Default Command, type: Command, validators: null, value: Teleop Drive}
       Constants: !!robotbuilder.data.properties.ConstantsProperty
         default: []
         name: Constants
