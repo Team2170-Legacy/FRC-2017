@@ -94,13 +94,19 @@ AutonomousMotionProfile::AutonomousMotionProfile(const ProfileData* LeftWheel, b
 }
 
 AutonomousMotionProfile::AutonomousMotionProfile(const ProfileData* LeftWheel,
-		const ProfileData* RightWheel, bool ResetGyro, bool Blended) : Command(),
+		const ProfileData* RightWheel, bool ResetGyro, bool Blended, double time) : Command(),
 				talonService(AutonomousMotionProfile::PeriodicTask) {
 	Requires(Robot::driveTrain.get());
+	int Count;
 	bResetGyro = ResetGyro;
 	bBlended = Blended;
 	mLeftWheel.reset(LeftWheel);
 	mRightWheel.reset(RightWheel);
+	Count = (int)(time / (mLeftWheel->at(0).at(2) / 1000));
+	for(int j = 0; j < Count; j++) {
+		mLocalLeftWheel.push_back(mLeftWheel->at(j));
+	}
+	mTime = time;
 }
 
 AutonomousMotionProfile::AutonomousMotionProfile(

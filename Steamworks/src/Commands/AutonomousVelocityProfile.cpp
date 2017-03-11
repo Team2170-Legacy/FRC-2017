@@ -35,13 +35,13 @@ void AutonomousVelocityProfile::Execute() {
 	if (ErrorSource != nullptr) {
 		ErrorValue = *(double*)ErrorSource;
 	}
-	Robot::driveTrain->SetChassisVelocity(*it, ErrorValue);
+	//Robot::driveTrain->SetChassisVelocity(*it, ErrorValue);
 	Robot::driveTrain->TelemetryUpdate();
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool AutonomousVelocityProfile::IsFinished() {
-    return it == velocity.end();
+    return false;
 }
 
 // Called once after isFinished returns true
@@ -56,8 +56,8 @@ void AutonomousVelocityProfile::Interrupted() {
 }
 
 AutonomousVelocityProfile::AutonomousVelocityProfile(
-		std::vector<double>& vIPS, int* error) {
-	velocity = vIPS;
-	it = velocity.begin();
+		const ProfileData* LeftWheel, const ProfileData* RightWheel,
+					double time, int* error) {
+
 	ErrorSource = error;
 }

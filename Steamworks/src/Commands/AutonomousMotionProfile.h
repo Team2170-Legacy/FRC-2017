@@ -35,7 +35,7 @@ public:
 	AutonomousMotionProfile(const std::string& LProfileName, const std::string& RProfileName,
 			bool ResetGyro = true);
 	AutonomousMotionProfile(const ProfileData* LeftWheel, const ProfileData* RightWheel,
-			bool ResetGyro = true, bool Blended = false);
+			bool ResetGyro = true, bool Blended = false, double time = 0.0);
 
 	virtual void Initialize();
 	virtual void Execute();
@@ -51,6 +51,8 @@ private:
 	std::shared_ptr<const ProfileData> mLeftWheel;	// Pointer to left side motion profile data
 	std::shared_ptr<const ProfileData> mRightWheel;	// Pointer to right side motion profile data
 
+	ProfileData mLocalLeftWheel;
+	ProfileData mLocalRightWheel;
 	static void PeriodicTask();
 	static int Notifier_counter;
 	Notifier talonService;
@@ -59,6 +61,7 @@ private:
 	ProfileData mRightProfile;
 	bool bResetGyro = true;
 	bool bBlended = false;
+	double mTime = 0.0;
 };
 
 #endif
