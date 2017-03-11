@@ -51,8 +51,6 @@ private:
 	std::shared_ptr<const ProfileData> mLeftWheel;	// Pointer to left side motion profile data
 	std::shared_ptr<const ProfileData> mRightWheel;	// Pointer to right side motion profile data
 
-	ProfileData mLocalLeftWheel;
-	ProfileData mLocalRightWheel;
 	static void PeriodicTask();
 	static int Notifier_counter;
 	Notifier talonService;
