@@ -118,6 +118,7 @@ void Payload::SetClimberSpeed(ClimberSpeed speed) {
 void Payload::InitPayload() {
 	cANTalonElevator->SetFeedbackDevice(CANTalon::QuadEncoder);
 	cANTalonElevator->ConfigEncoderCodesPerRev(kElevatorCountsPerRev);
+	cANTalonElevator->SetStatusFrameRateMs(CANTalon::StatusFrameRate::StatusFrameRateFeedback, 10);
 	cANTalonElevator->SetSensorDirection(false);
 	cANTalonElevator->SetPosition(0.0);
 	SetElevatorMode(LoopMode::kOpenLoop);
@@ -171,7 +172,7 @@ void Payload::SlewElevator(ElevatorDir direction) {
 			cANTalonElevator->Set(kElevatorHomeSpeed);
 			break;
 		case kSlewOffHome:
-			cANTalonElevator->Set(-kElevatorHomeSpeed);
+			cANTalonElevator->Set(-kElevatorHomeSpeed / 2.0);
 			break;
 		}
 	} else if (mCurrentMode == LoopMode::kClosedLoop) {

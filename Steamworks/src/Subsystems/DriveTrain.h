@@ -58,6 +58,10 @@ private:
 
 	double chassis_pitch = 0.0;
 
+	double MapStick(double stick);
+	const double kThrottleBreak;
+	const double kStickBreak;
+
 	CANTalon::MotionProfileStatus LeftStatus;
 	CANTalon::MotionProfileStatus RightStatus;
 
@@ -129,6 +133,10 @@ public:
 
 	void setReverseDrive(bool reverseDrive = false) {
 		mReverseDrive = reverseDrive;
+	}
+
+	bool isDriveStraight() const {
+		return bDriveStraight;
 	}
 };
 
