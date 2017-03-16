@@ -35,7 +35,7 @@ public:
 	AutonomousMotionProfile(const std::string& LProfileName, const std::string& RProfileName,
 			bool ResetGyro = true);
 	AutonomousMotionProfile(const ProfileData* LeftWheel, const ProfileData* RightWheel,
-			bool ResetGyro = true, bool Blended = false);
+			bool ResetGyro = true, bool Blended = false, double time = 0.0);
 
 	virtual void Initialize();
 	virtual void Execute();
@@ -59,6 +59,7 @@ private:
 	ProfileData mRightProfile;
 	bool bResetGyro = true;
 	bool bBlended = false;
+	double mTime = 0.0;
 };
 
 #endif
