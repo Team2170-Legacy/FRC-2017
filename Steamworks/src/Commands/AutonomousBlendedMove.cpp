@@ -42,7 +42,7 @@ AutonomousBlendedMove::AutonomousBlendedMove() {
 }
 
 AutonomousBlendedMove::AutonomousBlendedMove(const ProfileData* Left,
-		const ProfileData* Right, double time) {
+		const ProfileData* Right, double time, int* error) {
 	AddSequential(new AutonomousMotionProfile(Left, Right, false, true, time));
-	AddSequential(new AutonomousVelocityProfile(Left, Right, time, nullptr));
+	AddSequential(new AutonomousVelocityProfile(Left, Right, time, error));
 }
