@@ -87,6 +87,7 @@ public:
 	void SetChassisPosition(double position);
 	void SetChassisVelocity(double velocity);
 	void SetChassisVelocity(double velocity, double error);
+	void SetChassisWheelVelocity(double left, double right);
 	void FillProfileBuffer(std::shared_ptr<const ProfileData> LeftWheel);
 	void FillProfileBuffer(std::shared_ptr<const ProfileData> LeftWheel,
 			std::shared_ptr<const ProfileData> RightWheel);

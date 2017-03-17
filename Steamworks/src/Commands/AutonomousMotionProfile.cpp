@@ -44,7 +44,7 @@ void AutonomousMotionProfile::Initialize() {
 		Robot::driveTrain->FillProfileBuffer(mLeftWheel);
 	}
 	double ServiceRate = mLeftWheel->at(0).at(2);
-	talonService.StartPeriodic(ServiceRate / 2000.0);	// 1/2 rate of motion profile
+	talonService.StartPeriodic(ServiceRate / 2000.0);	// 1/2 period of motion profile
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -94,13 +94,29 @@ AutonomousMotionProfile::AutonomousMotionProfile(const ProfileData* LeftWheel, b
 }
 
 AutonomousMotionProfile::AutonomousMotionProfile(const ProfileData* LeftWheel,
-		const ProfileData* RightWheel, bool ResetGyro, bool Blended) : Command(),
+		const ProfileData* RightWheel, bool ResetGyro, bool Blended, double time) : Command(),
 				talonService(AutonomousMotionProfile::PeriodicTask) {
 	Requires(Robot::driveTrain.get());
+	unsigned int Count;
+
 	bResetGyro = ResetGyro;
 	bBlended = Blended;
 	mLeftWheel.reset(LeftWheel);
 	mRightWheel.reset(RightWheel);
+	mTime = time;
+
+	Count = (unsigned int)(time / (mLeftWheel->at(0).at(2) / 1000));
+	if (Count > mLeftWheel->size()) {
+		Count = mLeftWheel->size();
+	}
+
+	for(unsigned int j = 0; j < Count; j++) {
+		mLeftProfile.push_back(mLeftWheel->at(j));
+		mRightProfile.push_back(mRightWheel->at(j));
+	}
+
+	mLeftWheel.reset(&mLeftProfile);
+	mRightWheel.reset(&mRightProfile);
 }
 
 AutonomousMotionProfile::AutonomousMotionProfile(

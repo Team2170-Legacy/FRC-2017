@@ -510,3 +510,11 @@ double DriveTrain::MapStick(double stick) {
 
 	return NewStick;
 }
+
+void DriveTrain::SetChassisWheelVelocity(double left, double right) {
+	if ((cANTalonLeft->GetTalonControlMode() == CANTalon::TalonControlMode::kSpeedMode)
+			&& (cANTalonRight->GetTalonControlMode() == CANTalon::TalonControlMode::kSpeedMode)) {
+		cANTalonLeft->Set(left);
+		cANTalonRight->Set(-right);
+	}
+}

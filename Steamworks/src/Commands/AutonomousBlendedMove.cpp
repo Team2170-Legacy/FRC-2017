@@ -42,7 +42,7 @@ AutonomousBlendedMove::AutonomousBlendedMove() {
 }
 
 AutonomousBlendedMove::AutonomousBlendedMove(const ProfileData* Left,
-		const ProfileData* Right, std::vector<double> &vIPS) {
-	AddSequential(new AutonomousMotionProfile(Left, Right, false, true));
-	AddSequential(new AutonomousVelocityProfile(vIPS, nullptr));
+		const ProfileData* Right, double time, int* error) {
+	AddSequential(new AutonomousMotionProfile(Left, Right, false, true, time));
+	AddSequential(new AutonomousVelocityProfile(Left, Right, time, error));
 }
