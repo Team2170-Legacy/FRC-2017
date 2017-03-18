@@ -16,6 +16,7 @@
 #include "Commands/AutonomousCommand.h"
 #include "Commands/AutonomousTestGroup.h"
 #include "Commands/AutonomousInitGroup.h"
+#include "Commands/AutonomousBlendedMove.h"
 #include "Commands/AutonomousMotionProfile.h"
 #include "Commands/ElevatorInitialize.h"
 #include "ProfileData.h"
@@ -68,10 +69,12 @@ void Robot::RobotInit() {
 	chooser.AddObject("Autonomous", new (AutonomousCommand));
 	chooser.AddObject("Auto Testing - Don't choose in match!!", new (AutonomousTestGroup));
 	chooser.AddObject("Do Nothing", new (ElevatorInitialize));
-	chooser.AddDefault("MoveToBaseline",
+	chooser.AddObject("MoveToBaseline",
 			new AutonomousInitGroup(&AutonomousMoveToBaseline));
 	chooser.AddObject("MoveToGearPeg",
 			new AutonomousInitGroup(&AutonomousMoveToGearPeg));
+	chooser.AddDefault("RS1 to RP1",
+			new AutonomousBlendedMove(&AutoMove_RS1_to_RP1_L, &AutoMove_RS1_to_RP1_R, t_auto_end_RS1_to_RP1, &e_Gear_x));
 	SmartDashboard::PutData("Autonomous Modes", &chooser);
   }
 
