@@ -87,12 +87,12 @@ void Payload::SetBackDoorPosition(DoorPosition position) {
 	switch (position) {
 	case kDoorOpen:
 		doorServoA->Set(kDoorOpenPosition);
-		doorServoB->Set(kDoorOpenPosition);
+		doorServoB->Set(kDoorClosePosition);
 		DoorOpen = true;
 		break;
 	case kDoorClosed:
 		doorServoA->Set(kDoorClosePosition);
-		doorServoB->Set(kDoorClosePosition);
+		doorServoB->Set(kDoorOpenPosition);
 		DoorOpen = false;
 		break;
 	}

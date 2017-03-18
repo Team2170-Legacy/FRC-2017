@@ -58,7 +58,9 @@ void Robot::RobotInit() {
 			new AutonomousInitGroup(&AutonomousMoveToGearPeg));
 	SmartDashboard::PutData("Autonomous Modes", &chooser);
 
-	CameraServer::GetInstance()->StartAutomaticCapture();
+	if (mVisionEnabled) {
+		CameraServer::GetInstance()->StartAutomaticCapture();
+	}
   }
 
 /**

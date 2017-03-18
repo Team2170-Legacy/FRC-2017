@@ -25,7 +25,7 @@ TeleopDrive::TeleopDrive(): Command() {
 
 // Called just before this Command runs the first time
 void TeleopDrive::Initialize() {
-	m_DriverJoystick = Robot::oi->getDriverJoystick();
+	m_DriverJoystick = Robot::oi->getLeftDriverJoystick();
 	r_DriverJoystick = Robot::oi->getRightDriverJoystick();
 }
 
