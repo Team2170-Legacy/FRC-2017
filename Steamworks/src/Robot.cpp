@@ -75,7 +75,11 @@ void Robot::RobotInit() {
 			new AutonomousInitGroup(&AutonomousMoveToGearPeg));
 	chooser.AddDefault("RS1 to RP1",
 			new AutonomousBlendedMove(&AutoMove_RS1_to_RP1_L, &AutoMove_RS1_to_RP1_R, t_auto_end_RS1_to_RP1, &e_Gear_x));
+	chooser.AddDefault("RS2 to RP2",
+			new AutonomousBlendedMove(&AutoMove_RS2_to_RP2_L, &AutoMove_RS2_to_RP2_R, t_auto_end_RS2_to_RP2, &e_Gear_x));
+	chooser.AddDefault("RS3 to RP3", new AutonomousBlendedMove(&AutoMove_RS3_to_RP3_L, &AutoMove_RS3_to_RP3_R, t_auto_end_RS3_to_RP3, &e_Gear_x));
 	SmartDashboard::PutData("Autonomous Modes", &chooser);
+
   }
 
 /**
