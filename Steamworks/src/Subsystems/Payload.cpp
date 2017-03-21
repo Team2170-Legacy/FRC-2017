@@ -87,12 +87,12 @@ void Payload::SetBackDoorPosition(DoorPosition position) {
 	switch (position) {
 	case kDoorOpen:
 		doorServoA->Set(kDoorOpenPosition);
-		doorServoB->Set(kDoorOpenPosition);
+		doorServoB->Set(kDoorClosePosition);
 		DoorOpen = true;
 		break;
 	case kDoorClosed:
 		doorServoA->Set(kDoorClosePosition);
-		doorServoB->Set(kDoorClosePosition);
+		doorServoB->Set(kDoorOpenPosition);
 		DoorOpen = false;
 		break;
 	}
@@ -211,7 +211,12 @@ void Payload::ZeroElevatorPosition() {
 }
 
 double Payload::GetElevatorPosition() {
-	return cANTalonElevator->GetPosition();
+	if (Preferences::GetInstance()->GetBoolean("NoElevator", false)) {
+		return 0.0;
+	}
+	else {
+		return cANTalonElevator->GetPosition();
+	}
 }
 // Put methods for controlling this
 // here. Call these from Commands.

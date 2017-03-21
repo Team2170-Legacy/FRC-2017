@@ -79,7 +79,6 @@ void Robot::RobotInit() {
 			new AutonomousBlendedMove(&AutoMove_RS2_to_RP2_L, &AutoMove_RS2_to_RP2_R, t_auto_end_RS2_to_RP2, &e_Gear_x));
 	chooser.AddDefault("RS3 to RP3", new AutonomousBlendedMove(&AutoMove_RS3_to_RP3_L, &AutoMove_RS3_to_RP3_R, t_auto_end_RS3_to_RP3, &e_Gear_x));
 	SmartDashboard::PutData("Autonomous Modes", &chooser);
-
   }
 
 /**
@@ -89,9 +88,7 @@ void Robot::RobotInit() {
 void Robot::DisabledInit(){
 	payload->SetIntakeSpeed(Payload::IntakeSpeed::kIntakeStop);
 	dumper->DumperSetSpeed(Dumper::DumperSpeed::kDumperOff);
-	SmartDashboard::PutBoolean("Dumper Running", dumper->IsDumperMoving());
-	SmartDashboard::PutBoolean("DoorOpen", payload->IsDoorOpen());
-	SmartDashboard::PutBoolean("Intake Running", payload->IsIntakeRunning());
+	UpdateSmartDash();
 }
 
 void Robot::DisabledPeriodic() {

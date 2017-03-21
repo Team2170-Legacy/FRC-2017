@@ -27,7 +27,7 @@ TankDriveTeleop::TankDriveTeleop(): Command() {
 
 // Called just before this Command runs the first time
 void TankDriveTeleop::Initialize() {
-	mDriverControl = new Xbox360(Robot::oi->getDriverJoystick());
+	mDriverControl = new Xbox360(Robot::oi->getLeftDriverJoystick());
 }
 
 // Called repeatedly when this Command is scheduled to run
