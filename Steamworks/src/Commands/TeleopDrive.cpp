@@ -34,7 +34,7 @@ void TeleopDrive::Execute() {
 	double left = m_DriverJoystick->GetY();
 	double right = r_DriverJoystick->GetY();
 
-	Robot::driveTrain->TankDrive(left, right);
+	Robot::driveTrain->TankDrive(-left, -right);
 
 }
 
