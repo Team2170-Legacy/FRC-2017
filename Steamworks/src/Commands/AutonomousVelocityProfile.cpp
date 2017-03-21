@@ -40,8 +40,8 @@ void AutonomousVelocityProfile::Execute() {
 	}
 
 	mCount = GetVelocityOffset();
-	if (mCount > mLeftWheel->size()) {
-		mCount = mLeftWheel->size();
+	if (mCount >= mLeftWheel->size()) {
+		mCount = mLeftWheel->size() - 1;
 	}
 
 	Robot::driveTrain->SetChassisWheelVelocity(mLeftWheel->at(mCount).at(1) + ErrorValue,
@@ -51,7 +51,7 @@ void AutonomousVelocityProfile::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool AutonomousVelocityProfile::IsFinished() {
-    return (mCount >= mLeftWheel->size());
+    return (mCount >= mLeftWheel->size() - 1);
 }
 
 // Called once after isFinished returns true

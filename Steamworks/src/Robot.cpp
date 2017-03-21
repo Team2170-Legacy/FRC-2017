@@ -70,9 +70,7 @@ void Robot::RobotInit() {
 void Robot::DisabledInit(){
 	payload->SetIntakeSpeed(Payload::IntakeSpeed::kIntakeStop);
 	dumper->DumperSetSpeed(Dumper::DumperSpeed::kDumperOff);
-	SmartDashboard::PutBoolean("Dumper Running", dumper->IsDumperMoving());
-	SmartDashboard::PutBoolean("DoorOpen", payload->IsDoorOpen());
-	SmartDashboard::PutBoolean("Intake Running", payload->IsIntakeRunning());
+	UpdateSmartDash();
 }
 
 void Robot::DisabledPeriodic() {

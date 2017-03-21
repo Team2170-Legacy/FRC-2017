@@ -46,7 +46,7 @@ CANTalonLogger::CANTalonLogger(std::shared_ptr<CANTalon> talon, std::string name
 	printf("construct\n");
 	Talon = talon;
 	mFilename = name;
-	tLog.open(mFilename, std::ofstream::out | std::ofstream::trunc);
+	tLog.open(mFilename, std::ofstream::out | std::ofstream::trunc | std::ofstream::app);
 	tLog << "Pos (rotation), Setpoint, Error (counts), Speed, Voltage, Current" << std::endl;
 }
 

@@ -459,11 +459,11 @@ void DriveTrain::InitTalons(void) {
 
 	if (prefs->GetBoolean("LeftReverse", false)) {
 		cANTalonLeft->SetInverted(true);
-		cANTalonLeft->SetClosedLoopOutputDirection(true);
+		cANTalonLeft->SetClosedLoopOutputDirection(false);
 	}
 	if (prefs->GetBoolean("RightReverse", false)) {
 		cANTalonRight->SetInverted(true);
-		cANTalonRight->SetClosedLoopOutputDirection(true);
+		cANTalonRight->SetClosedLoopOutputDirection(false);
 	}
 
 	SetMotorGains();
