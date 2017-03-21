@@ -13,12 +13,12 @@
 
 #include "../ProfileData.h"
 
-#include "BS1_to_BP1.h"
-#include "BS2_to_BP2.h"
-#include "BS3_to_BP3.h"
-#include "RS1_to_RP1.h"
-#include "RS2_to_RP2.h"
-#include "RS3_to_RP3.h"
+#include "../automoves/BS1_to_BP1.h"
+#include "../automoves/BS2_to_BP2.h"
+#include "../automoves/BS3_to_BP3.h"
+#include "../automoves/RS1_to_RP1.h"
+#include "../automoves/RS2_to_RP2.h"
+#include "../automoves/RS3_to_RP3.h"
 
 class VisionProcessing {
 private:
