@@ -113,7 +113,8 @@ void DriveTrain::SetVoltagePercentMode() {
 	SetRampRate(kDefaultVoltageRamp);
 	cANTalonLeft->Set(0.0);
 	cANTalonRight->Set(0.0);
-
+	LeftLog->EndSession();
+	RightLog->EndSession();
 }
 
 void DriveTrain::TankDriveWithTriggers(double Left, double Right, double Trigger) {
@@ -236,6 +237,8 @@ void DriveTrain::SetVelocityMode() {
 	cANTalonLeft->Set(0.0);
 	cANTalonRight->SetTalonControlMode(CANTalon::TalonControlMode::kSpeedMode);
 	cANTalonRight->Set(0.0);
+	LeftLog->StartSession();
+	RightLog->StartSession();
 }
 
 void DriveTrain::SetChassisVelocity(double vIPS) {
@@ -332,8 +335,8 @@ void DriveTrain::FillProfileBuffer(std::shared_ptr<const ProfileData> LeftWheel,
 		cANTalonLeft->PushMotionProfileTrajectory(pt);
 
 		// Use right wheel profile for right side
-		pt.position = RightWheel->at(i).at(0);
-		pt.velocity = RightWheel->at(i).at(1);
+		pt.position = -RightWheel->at(i).at(0);
+		pt.velocity = -RightWheel->at(i).at(1);
 		pt.timeDurMs = RightWheel->at(i).at(2);
 		cANTalonRight->PushMotionProfileTrajectory(pt);
 		pt.zeroPos = false;
@@ -399,8 +402,6 @@ bool DriveTrain::MotionProfileComplete() {
 			(RightStatus.activePointValid && RightStatus.activePoint.isLastPoint)) {
 		Complete = true;
 		mMotionProcessingActive = false;
-		LeftLog->EndSession();
-		RightLog->EndSession();
 	}
 
 	return Complete;

@@ -14,9 +14,9 @@ CANTalonLogger::CANTalonLogger() {
 
 void CANTalonLogger::Update() {
 	if (tLog.is_open()) {
-		tLog << Talon->GetPosition() << ", " << Talon->GetSetpoint() << ", "
-				<< Talon->GetClosedLoopError() << ", "<< Talon->GetSpeed() << ", "
-				<< Talon->GetOutputVoltage() << ", " << Talon->GetOutputCurrent()
+		tLog << frc::Timer::GetFPGATimestamp() << "," << Talon->GetPosition()
+				<< "," << Talon->GetClosedLoopError() << ","
+				<< Talon->GetSpeed() << "," << Talon->GetOutputVoltage() << ","
 				<< std::endl;
 	}
 }
@@ -39,14 +39,16 @@ void CANTalonLogger::EndSession() {
 
 CANTalonLogger::~CANTalonLogger() {
 	// TODO Auto-generated destructor stub
-	tLog.close();
+	if (tLog.is_open()) {
+		tLog.close();
+	}
 }
 
 CANTalonLogger::CANTalonLogger(std::shared_ptr<CANTalon> talon, std::string name) {
 	printf("construct\n");
 	Talon = talon;
 	mFilename = name;
-	tLog.open(mFilename, std::ofstream::out | std::ofstream::trunc | std::ofstream::app);
-	tLog << "Pos (rotation), Setpoint, Error (counts), Speed, Voltage, Current" << std::endl;
+	tLog.open(mFilename, std::ofstream::out | std::ofstream::trunc);
+	tLog << "Time,Position,Error,Speed,Voltage" << std::endl;
 }
 
