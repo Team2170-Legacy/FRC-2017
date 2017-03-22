@@ -332,8 +332,8 @@ void DriveTrain::FillProfileBuffer(std::shared_ptr<const ProfileData> LeftWheel,
 		cANTalonLeft->PushMotionProfileTrajectory(pt);
 
 		// Use right wheel profile for right side
-		pt.position = RightWheel->at(i).at(0);
-		pt.velocity = RightWheel->at(i).at(1);
+		pt.position = -RightWheel->at(i).at(0);
+		pt.velocity = -RightWheel->at(i).at(1);
 		pt.timeDurMs = RightWheel->at(i).at(2);
 		cANTalonRight->PushMotionProfileTrajectory(pt);
 		pt.zeroPos = false;
