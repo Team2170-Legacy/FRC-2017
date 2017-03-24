@@ -14,7 +14,7 @@ CANTalonLogger::CANTalonLogger() {
 
 void CANTalonLogger::Update() {
 	if (tLog.is_open()) {
-		tLog << frc::Timer::GetFPGATimestamp() << "," << Talon->GetPosition()
+		tLog << LogTimer.Get() << "," << Talon->GetPosition()
 				<< "," << Talon->GetClosedLoopError() << ","
 				<< Talon->GetSpeed() << "," << Talon->GetOutputVoltage() << ","
 				<< std::endl;
@@ -29,12 +29,15 @@ void CANTalonLogger::StartSession() {
 	if (!tLog.is_open()) {
 		tLog.open(mFilename, std::ofstream::out | std::ofstream::app);
 	}
+	LogTimer.Reset();
+	LogTimer.Start();
 }
 
 void CANTalonLogger::EndSession() {
 	if (tLog.is_open()) {
 		tLog.close();
 	}
+	LogTimer.Stop();
 }
 
 CANTalonLogger::~CANTalonLogger() {
