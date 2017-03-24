@@ -25,6 +25,7 @@ private:
 	std::shared_ptr<CANTalon> Talon;
 	std::ofstream tLog;
 	std::string mFilename;
+	frc::Timer LogTimer;
 };
 
 #endif /* SRC_CANTALONLOGGER_H_ */
