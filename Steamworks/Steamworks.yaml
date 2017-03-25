@@ -1198,14 +1198,29 @@ Children:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: Drive Train}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id029 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id029
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: false}
     Base: Command
     Name: Teleop Drive Straight
+  - Children: []
+    Properties:
+      On True Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+        name: On True Command, type: Command, validators: null, value: None}
+      Parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: []
+        name: Parameters
+        validators: null
+        value: []
+      On False Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+        name: On False Command, type: Command, validators: null, value: None}
+      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
+        name: Button on SmartDashboard, validators: null, value: true}
+    Base: Conditional Command
+    Name: Autonomous Alliance Cmd
   Properties: {}
   Base: Commands
   Name: Commands
