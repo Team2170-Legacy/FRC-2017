@@ -43,8 +43,8 @@ private:
 
 	Preferences *prefs;
 
-	const double kProportionalGain = 0.75;
-	const double kDerivativeGain = 2.5;
+	const double kProportionalGain = 3.0;
+	const double kDerivativeGain = 6.0;
 	const double kFeedForwardGain = 0.75;
 
 	void SetVelocityMode();

@@ -244,8 +244,8 @@ void DriveTrain::SetVelocityMode() {
 void DriveTrain::SetChassisVelocity(double vIPS) {
 	if ((cANTalonLeft->GetTalonControlMode() == CANTalon::TalonControlMode::kSpeedMode)
 			&& (cANTalonRight->GetTalonControlMode() == CANTalon::TalonControlMode::kSpeedMode)) {
-		cANTalonLeft->Set(vIPS * InchesPerRotation);
-		cANTalonRight->Set(-vIPS * InchesPerRotation);
+		cANTalonLeft->Set(vIPS * 60.0 / InchesPerRotation);
+		cANTalonRight->Set(-vIPS * 60.0 / InchesPerRotation);
 	}
 }
 
@@ -488,10 +488,36 @@ double DriveTrain::GetChassisPosition() {
 }
 
 void DriveTrain::TankDrive(float Left, float Right) {
-	if (!mReverseDrive) {
-		robotDrive->TankDrive(Left, Right, false);
+
+	// Select velocity mode or throttle mode
+	if (kDriveVelocityMode) {
+		SetChassisMode(CANTalon::TalonControlMode::kSpeedMode);
 	} else {
-		robotDrive->TankDrive(-Right, -Left, false);
+		SetChassisMode(CANTalon::TalonControlMode::kThrottleMode);
+	}
+
+	if (kDriveVelocityMode) {
+		Left *= kDriveMaxVelocity;
+		Right *= kDriveMaxVelocity;
+		printf("Speed: %f    Error:  %d\n", Left,
+				cANTalonLeft->GetClosedLoopError());
+	}
+
+	if (!mReverseDrive) {
+		if (kDriveVelocityMode) {
+			cANTalonLeft->Set(Left);
+			cANTalonRight->Set(-Right);
+		}
+		else {
+			robotDrive->TankDrive(Left, Right, false);
+		}
+	} else {
+		if (kDriveVelocityMode) {
+			cANTalonLeft->Set(-Right);
+			cANTalonRight->Set(-Left);
+		} else {
+			robotDrive->TankDrive(-Right, -Left, false);
+		}
 	}
 	cANTalonSlaveRight->Set(2);
 	cANTalonSlaveLeft->Set(1);
@@ -530,5 +556,6 @@ void DriveTrain::SetChassisWheelVelocity(double left, double right) {
 			&& (cANTalonRight->GetTalonControlMode() == CANTalon::TalonControlMode::kSpeedMode)) {
 		cANTalonLeft->Set(left);
 		cANTalonRight->Set(-right);
+		TelemetryUpdate();
 	}
 }

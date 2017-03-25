@@ -28,8 +28,10 @@ private:
 	const double kSlewDeltaPosition;
 	const double kIntakeSpeed;
 	const unsigned short int kElevatorCountsPerRev = 360;
-	const double kDoorOpenPosition;
-	const double kDoorClosePosition;
+	const double kDoorAOpenPosition;
+	const double kDoorAClosePosition;
+	const double kDoorBOpenPosition;
+	const double kDoorBClosePosition;
 	const double kIntakeOnSpeed=1.0;
 	const double kIntakeOffSpeed=0.0;
 	const double kElevatorOpenLoopUpSpeed;
