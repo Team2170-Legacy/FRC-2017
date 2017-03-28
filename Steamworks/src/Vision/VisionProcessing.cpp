@@ -49,7 +49,7 @@ void VisionProcessing::VisionThread() {
 	cv::Mat source;
 	cv::Mat output;
 
-	grip::GearTwoNEW GearPipeline;
+	grip::GearThree GearPipeline;
 
 	cv::Rect r1, r2;
 
