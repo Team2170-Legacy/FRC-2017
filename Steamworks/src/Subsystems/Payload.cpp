@@ -25,8 +25,11 @@ Payload::Payload() : Subsystem("Payload"),
 kSlewSpeed(Preferences::GetInstance()->GetDouble("ElevSlewSpeed", .3)),
 kSlewDeltaPosition(Preferences::GetInstance()->GetDouble("ElevSlewDeltaPos", 10.0)),
 kIntakeSpeed(Preferences::GetInstance()->GetDouble("IntakeSpeed", 1.0)),
-kDoorOpenPosition(Preferences::GetInstance()->GetDouble("PayloadDoorOpenPos", 1.0)),
-kDoorClosePosition(Preferences::GetInstance()->GetDouble("PayloadDoorClosePos", 0.0)),
+ kDoorAOpenPosition(
+				Preferences::GetInstance()->GetDouble("DoorAOpenPos", 1.0)), kDoorAClosePosition(
+				Preferences::GetInstance()->GetDouble("DoorAClosePos", 0.35)), kDoorBOpenPosition(
+				Preferences::GetInstance()->GetDouble("DoorBOpenPos", 0.0)), kDoorBClosePosition(
+				Preferences::GetInstance()->GetDouble("DoorBClosePos", 0.5)),
 kElevatorOpenLoopUpSpeed(Preferences::GetInstance()->GetDouble("ElevatorOpenLoopUp", 0.5)),
 kElevatorOpenLoopDownSpeed(Preferences::GetInstance()->GetDouble("ElevatorOpenLoopDn", -0.5)),
 kElevatorMaxPosition(Preferences::GetInstance()->GetDouble("ElevatorMaxPos", 3.3)),
@@ -86,13 +89,13 @@ void Payload::SetIntakeSpeed(IntakeSpeed speed) {
 void Payload::SetBackDoorPosition(DoorPosition position) {
 	switch (position) {
 	case kDoorOpen:
-		doorServoA->Set(kDoorOpenPosition);
-		doorServoB->Set(kDoorClosePosition);
+		doorServoA->Set(kDoorAOpenPosition);
+		doorServoB->Set(kDoorBOpenPosition);
 		DoorOpen = true;
 		break;
 	case kDoorClosed:
-		doorServoA->Set(kDoorClosePosition);
-		doorServoB->Set(kDoorOpenPosition);
+		doorServoA->Set(kDoorAClosePosition);
+		doorServoB->Set(kDoorBClosePosition);
 		DoorOpen = false;
 		break;
 	}

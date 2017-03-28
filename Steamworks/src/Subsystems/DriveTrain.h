@@ -43,8 +43,8 @@ private:
 
 	Preferences *prefs;
 
-	const double kProportionalGain = 0.75;
-	const double kDerivativeGain = 2.5;
+	const double kProportionalGain = 3.0;
+	const double kDerivativeGain = 6.0;
 	const double kFeedForwardGain = 0.75;
 
 	void SetVelocityMode();
@@ -54,7 +54,7 @@ private:
 	double AxisPower(double axis, double exponent);
 	void InitTalons(void);
 	void SetRampRate(double ramp);
-	void SetMotorGains();
+	void SetMotorGains(int idx = 0);
 
 	double chassis_pitch = 0.0;
 
