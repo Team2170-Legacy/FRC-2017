@@ -54,7 +54,7 @@ private:
 	double AxisPower(double axis, double exponent);
 	void InitTalons(void);
 	void SetRampRate(double ramp);
-	void SetMotorGains();
+	void SetMotorGains(int idx = 0);
 
 	double chassis_pitch = 0.0;
 

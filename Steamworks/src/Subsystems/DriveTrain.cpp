@@ -202,6 +202,7 @@ void DriveTrain::SetClosedLoopMode() {
 }
 
 void DriveTrain::SetMotionProfileMode() {
+	SetMotorGains(0);
 	cANTalonLeft->SetTalonControlMode(CANTalon::TalonControlMode::kMotionProfileMode);
 	cANTalonLeft->SetPosition(0.0);
 	cANTalonLeft->Set(CANTalon::SetValueMotionProfile::SetValueMotionProfileDisable);
@@ -233,6 +234,7 @@ double DriveTrain::ReadPositionError() {
 }
 
 void DriveTrain::SetVelocityMode() {
+	SetMotorGains(1);
 	cANTalonLeft->SetTalonControlMode(CANTalon::TalonControlMode::kSpeedMode);
 	cANTalonLeft->Set(0.0);
 	cANTalonRight->SetTalonControlMode(CANTalon::TalonControlMode::kSpeedMode);
@@ -366,18 +368,9 @@ void DriveTrain::SetMotionProfileState(CANTalon::SetValueMotionProfile mode) {
 	}
 }
 
-void DriveTrain::SetMotorGains() {
-
-	cANTalonLeft->SelectProfileSlot(0);
-//	cANTalonLeft->SetP(kProportionalGain);
-//	cANTalonLeft->SetD(kDerivativeGain);
-//	cANTalonLeft->SetF(kFeedForwardGain);
-
-	cANTalonRight->SelectProfileSlot(0);
-//	cANTalonRight->SetP(kProportionalGain);
-//	cANTalonRight->SetD(kDerivativeGain);
-//	cANTalonRight->SetF(kFeedForwardGain);
-
+void DriveTrain::SetMotorGains(int idx) {
+	cANTalonLeft->SelectProfileSlot(idx);
+	cANTalonRight->SelectProfileSlot(idx);
 }
 
 bool DriveTrain::MotionProfileComplete() {
@@ -514,7 +507,7 @@ void DriveTrain::TankDrive(float Left, float Right) {
 	} else {
 		if (kDriveVelocityMode) {
 			cANTalonLeft->Set(-Right);
-			cANTalonRight->Set(-Left);
+			cANTalonRight->Set(Left);
 		} else {
 			robotDrive->TankDrive(-Right, -Left, false);
 		}
