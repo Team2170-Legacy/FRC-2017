@@ -36,14 +36,14 @@ void AutonomousVelocityProfile::Execute() {
 	double ErrorValue = 0.0;
 
 	if (mErrorSource != nullptr) {
-		ErrorValue = *(double*)mErrorSource * kPGain;
+		ErrorValue = *mErrorSource * kPGain;
 	}
 
 	mCount = GetVelocityOffset();
 	if (mCount >= mLeftWheel->size()) {
 		mCount = mLeftWheel->size() - 1;
 	}
-
+	printf("Error Value %f\n", ErrorValue);
 	Robot::driveTrain->SetChassisWheelVelocity(mLeftWheel->at(mCount).at(1) + ErrorValue,
 			mRightWheel->at(mCount).at(1) - ErrorValue);
 	Robot::driveTrain->TelemetryUpdate();
