@@ -1,5 +1,4 @@
-/*
- * VisionProcessing.cpp
+/* * VisionProcessing.cpp
  *
  *  Created on: Mar 1, 2017
  *      Author: nollchr
@@ -64,7 +63,7 @@ void VisionProcessing::VisionThread() {
 		uint64_t grab_Frame_Status = -1;
 
 		grab_Frame_Status = cvSink.GrabFrame(source);
-		std::cout << "Grab Frame Status: " << grab_Frame_Status << std::endl;
+//		std::cout << "Grab Frame Status: " << grab_Frame_Status << std::endl;
 
 		//if (grab_Frame_Status == 0 && source.rows > 0) {
 		if (source.rows > 0) {
