@@ -45,9 +45,9 @@ void ElevatorPosition::Execute() {
 bool ElevatorPosition::IsFinished() {
 	bool Done = false;
 	if (bMoveDown) {
-		Done = Robot::payload->GetElevatorPosition() <= mPosition;
+		Done = (Robot::payload->GetElevatorPosition() <= mPosition);
 	} else {
-		Done = Robot::payload->GetElevatorPosition() >= mPosition;
+		Done = (Robot::payload->GetElevatorPosition() >= mPosition);
 	}
 	return Done;
 }
