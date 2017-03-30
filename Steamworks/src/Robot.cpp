@@ -18,6 +18,7 @@
 #include "Commands/AutonomousInitGroup.h"
 #include "Commands/AutonomousBlendedMove.h"
 #include "Commands/AutonomousMotionProfile.h"
+#include "Commands/AutonomousGearGroup.h"
 #include "Commands/ElevatorInitialize.h"
 #include "ProfileData.h"
 
@@ -63,21 +64,25 @@ void Robot::RobotInit() {
 	chooser.AddObject("Autonomous", new (AutonomousCommand));
 	chooser.AddObject("Auto Testing - Don't choose in match!!",
 			new (AutonomousTestGroup));
-	chooser.AddObject("Do Nothing", new (ElevatorInitialize));
+	chooser.AddDefault("Do Nothing", new (ElevatorInitialize));
 	chooser.AddObject("MoveToBaseline",
 			new AutonomousInitGroup(&AutonomousMoveToBaseline));
-	chooser.AddDefault("RS1 to RP1",
+	chooser.AddObject("Left Peg",
+			new AutonomousGearGroup(
 			new AutonomousBlendedMove(&AutoMove_RS1_to_RP1_L,
 					&AutoMove_RS1_to_RP1_R, t_auto_end_RS1_to_RP1,
-					&VisionProcessing::e_Gear_x));
-	chooser.AddDefault("RS2 to RP2",
+							&VisionProcessing::e_Gear_x)));
+	chooser.AddObject("Center Peg",
+			new AutonomousGearGroup(
 			new AutonomousBlendedMove(&AutoMove_RS2_to_RP2_L,
 					&AutoMove_RS2_to_RP2_R, t_auto_end_RS2_to_RP2,
-					&VisionProcessing::e_Gear_x));
-	chooser.AddDefault("RS3 to RP3",
+							&VisionProcessing::e_Gear_x)));
+	chooser.AddObject("Right Peg",
+			new AutonomousGearGroup(
 			new AutonomousBlendedMove(&AutoMove_RS3_to_RP3_L,
 					&AutoMove_RS3_to_RP3_R, t_auto_end_RS3_to_RP3,
-					&VisionProcessing::e_Gear_x));
+							&VisionProcessing::e_Gear_x)));
+	chooser.AddObject("Peg and Boiler", new AutonomousGearGroup());
 	SmartDashboard::PutData("Autonomous Modes", &chooser);
   }
 

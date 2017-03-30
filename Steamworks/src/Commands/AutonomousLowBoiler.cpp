@@ -1,4 +1,7 @@
 #include "AutonomousLowBoiler.h"
+#include "ElevatorPosition.h"
+#include "IntakeReverse.h"
+#include "IntakeOff.h"
 
 AutonomousLowBoiler::AutonomousLowBoiler() {
 	// Add Commands here:
@@ -19,5 +22,11 @@ AutonomousLowBoiler::AutonomousLowBoiler() {
 	// arm.
 
 	// Dump balls into low boiler
+	double ElevatorPos = Preferences::GetInstance()->GetDouble(
+			"ElevatorLowBoiler", 1000.0);
 
+	AddSequential(new ElevatorPosition(ElevatorPos));
+	AddSequential(new IntakeReverse());
+	AddSequential(new frc::WaitCommand(2.0));
+	AddSequential(new IntakeOff());
 }
