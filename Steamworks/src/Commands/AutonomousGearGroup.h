@@ -14,8 +14,12 @@
 
 class AutonomousGearGroup: public CommandGroup {
 public:
-	AutonomousGearGroup();
-	AutonomousGearGroup(frc::Command* cmd);
+	enum PegLocation {
+		kCenterPeg,
+		kLeftPeg,
+		kRightPeg
+	};
+	AutonomousGearGroup(PegLocation peg = kCenterPeg, bool GotoBoiler = false);
 
 private:
 	const ProfileData MoveOffPeg { { { 0, 0, 10 }, { 0.0000236837712934368,
