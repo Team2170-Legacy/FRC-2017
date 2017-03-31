@@ -64,18 +64,18 @@ void Robot::RobotInit() {
 	chooser.AddDefault("Do Nothing", new (ElevatorInitialize));
 	chooser.AddObject("MoveToBaseline",
 			new AutonomousInitGroup(&AutonomousMoveToBaseline));
-	chooser.AddObject("Left Peg",
-			new AutonomousGearGroup(AutonomousGearGroup::kLeftPeg));
-	chooser.AddObject("Center Peg",
-			new AutonomousGearGroup(AutonomousGearGroup::kCenterPeg));
-	chooser.AddObject("Right Peg",
-			new AutonomousGearGroup(AutonomousGearGroup::kRightPeg));
-	chooser.AddObject("Left Peg AND Boiler",
-			new AutonomousGearGroup(AutonomousGearGroup::kLeftPeg, true));
-	chooser.AddObject("Center Peg AND Boiler",
-			new AutonomousGearGroup(AutonomousGearGroup::kCenterPeg, true));
-	chooser.AddObject("Right Peg AND Boiler",
-			new AutonomousGearGroup(AutonomousGearGroup::kRightPeg, true));
+	chooser.AddObject("Red Left Peg",
+			new AutonomousGearGroup(AutonomousGearGroup::kLeftPegRed));
+	chooser.AddObject("Red Center Peg",
+			new AutonomousGearGroup(AutonomousGearGroup::kCenterPegRed));
+	chooser.AddObject("Red Right Peg",
+			new AutonomousGearGroup(AutonomousGearGroup::kRightPegRed));
+	chooser.AddObject("Blue Left Peg",
+			new AutonomousGearGroup(AutonomousGearGroup::kLeftPegBlue));
+	chooser.AddObject("Blue Center Peg",
+			new AutonomousGearGroup(AutonomousGearGroup::kCenterPegBlue));
+	chooser.AddObject("Blue Right Peg",
+			new AutonomousGearGroup(AutonomousGearGroup::kRightPegBlue));
 	SmartDashboard::PutData("Autonomous Modes", &chooser);
   }
 

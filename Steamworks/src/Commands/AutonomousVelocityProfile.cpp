@@ -70,7 +70,7 @@ AutonomousVelocityProfile::AutonomousVelocityProfile(
 		const ProfileData* LeftWheel, const ProfileData* RightWheel,
 		double time, int* error) :
 		Command(), kPGain(
-				Preferences::GetInstance()->GetDouble("VisionPGain", 0.0)) {
+				Preferences::GetInstance()->GetDouble("VisionPGain", 0.75)) {
 	Requires(Robot::driveTrain.get());
 
 	mLeftWheel.reset(LeftWheel);

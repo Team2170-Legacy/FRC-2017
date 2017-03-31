@@ -15,11 +15,15 @@
 class AutonomousGearGroup: public CommandGroup {
 public:
 	enum PegLocation {
-		kCenterPeg,
-		kLeftPeg,
-		kRightPeg
+		kCenterPegRed,
+		kLeftPegRed,
+		kRightPegRed,
+		kCenterPegBlue,
+		kLeftPegBlue,
+		kRightPegBlue
 	};
-	AutonomousGearGroup(PegLocation peg = kCenterPeg, bool GotoBoiler = false);
+	AutonomousGearGroup(PegLocation peg = kCenterPegRed,
+			bool GotoBoiler = false);
 
 private:
 	const ProfileData MoveOffPeg { { { 0, 0, 10 }, { 0.0000236837712934368,

@@ -19,6 +19,7 @@ AutonomousAllianceCmd::AutonomousAllianceCmd() :
 
 bool AutonomousAllianceCmd::Condition(){
 	//Return true if Red, false otherwise (i.e. Blue)
+	printf("color %d\n", frc::DriverStation::GetInstance().GetAlliance());
 	return (frc::DriverStation::GetInstance().GetAlliance()
 			== frc::DriverStation::kRed);
 }

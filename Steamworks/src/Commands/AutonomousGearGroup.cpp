@@ -20,34 +20,48 @@
 
 AutonomousGearGroup::AutonomousGearGroup(PegLocation loc, bool GotoBoiler) {
 	// TODO Auto-generated constructor stub
-	AddParallel(new ElevatorInitialize());
+//	AddSequential(new ElevatorInitialize());
 
 	switch (loc) {
-	case kCenterPeg:
+	case kCenterPegRed:
+		AddSequential(new frc::PrintCommand("Center Peg\n"));
 		AddSequential(
 				new AutonomousBlendedMove(&AutoMove_RS2_to_RP2_L,
 						&AutoMove_RS2_to_RP2_R, t_auto_end_RS2_to_RP2,
 						&VisionProcessing::e_Gear_x));
 		break;
-	case kLeftPeg:
+	case kLeftPegRed:
+		AddSequential(new frc::PrintCommand("Left Peg\n"));
 		AddSequential(
-				new AutonomousAllianceCmd(
-						new AutonomousBlendedMove(&AutoMove_RS1_to_RP1_L,
-								&AutoMove_RS1_to_RP1_R, t_auto_end_RS1_to_RP1,
-								&VisionProcessing::e_Gear_x),
-						new AutonomousBlendedMove(&AutoMove_RS3_to_RP3_L,
-								&AutoMove_RS3_to_RP3_R, t_auto_end_RS3_to_RP3,
-								&VisionProcessing::e_Gear_x)));
+				new AutonomousBlendedMove(&AutoMove_RS1_to_RP1_L,
+						&AutoMove_RS1_to_RP1_R, t_auto_end_RS1_to_RP1,
+						&VisionProcessing::e_Gear_x));
 		break;
-	case kRightPeg:
+	case kRightPegRed:
+		AddSequential(new frc::PrintCommand("Right Peg\n"));
 		AddSequential(
-				new AutonomousAllianceCmd(
 						new AutonomousBlendedMove(&AutoMove_RS3_to_RP3_L,
 								&AutoMove_RS3_to_RP3_R, t_auto_end_RS3_to_RP3,
-								&VisionProcessing::e_Gear_x),
+						&VisionProcessing::e_Gear_x));
+		break;
+	case kCenterPegBlue:
+		AddSequential(
+				new AutonomousBlendedMove(&AutoMove_RS2_to_RP2_L,
+						&AutoMove_RS2_to_RP2_R, t_auto_end_RS2_to_RP2,
+						&VisionProcessing::e_Gear_x));
+		break;
+	case kLeftPegBlue:
+		AddSequential(new frc::PrintCommand("Left Peg\n"));
+		AddSequential(
+						new AutonomousBlendedMove(&AutoMove_RS3_to_RP3_L,
+								&AutoMove_RS3_to_RP3_R, t_auto_end_RS3_to_RP3,
+						&VisionProcessing::e_Gear_x));
+		break;
+	case kRightPegBlue:
+		AddSequential(
 						new AutonomousBlendedMove(&AutoMove_RS1_to_RP1_L,
 								&AutoMove_RS1_to_RP1_R, t_auto_end_RS1_to_RP1,
-								&VisionProcessing::e_Gear_x)));
+						&VisionProcessing::e_Gear_x));
 		break;
 	default:
 		break;
@@ -58,7 +72,7 @@ AutonomousGearGroup::AutonomousGearGroup(PegLocation loc, bool GotoBoiler) {
 
 	if (GotoBoiler) {
 		switch (loc) {
-		case kCenterPeg:
+		case kCenterPegRed:
 			AddSequential(
 					new AutonomousAllianceCmd(
 							new AutonomousMotionProfile(&AutoMove_RP2_to_RB_L,
@@ -66,7 +80,7 @@ AutonomousGearGroup::AutonomousGearGroup(PegLocation loc, bool GotoBoiler) {
 							new AutonomousMotionProfile(&AutoMove_RP2_to_RB_L,
 									&AutoMove_RP2_to_RB_R)));
 			break;
-		case kLeftPeg:
+		case kLeftPegRed:
 			AddSequential(
 					new AutonomousAllianceCmd(
 							new AutonomousMotionProfile(&AutoMove_RP1_to_RB_L,
@@ -74,7 +88,7 @@ AutonomousGearGroup::AutonomousGearGroup(PegLocation loc, bool GotoBoiler) {
 							new AutonomousMotionProfile(&AutoMove_RP1_to_RB_L,
 									&AutoMove_RP3_to_RB_R)));
 			break;
-		case kRightPeg:
+		case kRightPegRed:
 			AddSequential(
 					new AutonomousAllianceCmd(
 							new AutonomousMotionProfile(&AutoMove_RP3_to_RB_L,

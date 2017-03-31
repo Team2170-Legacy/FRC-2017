@@ -30,7 +30,7 @@ void TeleopDriveStraight::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void TeleopDriveStraight::Execute() {
-
+	Robot::driveTrain->TankDrive(0.6, 0.6);
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -40,7 +40,7 @@ bool TeleopDriveStraight::IsFinished() {
 
 // Called once after isFinished returns true
 void TeleopDriveStraight::End() {
-
+	Robot::driveTrain->StopMotors();
 }
 
 // Called when another command which requires one or more of the same
