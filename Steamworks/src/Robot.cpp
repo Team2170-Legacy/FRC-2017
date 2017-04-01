@@ -76,6 +76,10 @@ void Robot::RobotInit() {
 			new AutonomousGearGroup(AutonomousGearGroup::kCenterPegBlue));
 	chooser.AddObject("Blue Right Peg",
 			new AutonomousGearGroup(AutonomousGearGroup::kRightPegBlue));
+	chooser.AddObject("Red Right Peg AND Boiler",
+			new AutonomousGearGroup(AutonomousGearGroup::kRightPegRed, true));
+	chooser.AddObject("Blue Left Peg AND Boiler",
+			new AutonomousGearGroup(AutonomousGearGroup::kLeftPegBlue, true));
 	SmartDashboard::PutData("Autonomous Modes", &chooser);
   }
 

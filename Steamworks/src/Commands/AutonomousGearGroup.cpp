@@ -20,28 +20,26 @@
 #include "../automoves/BP1_to_BB.h"
 #include "../automoves/BP2_to_BB.h"
 #include "../automoves/BP3_to_BB.h"
+#include "../automoves/BB_to_F.h"
 
 AutonomousGearGroup::AutonomousGearGroup(PegLocation loc, bool GotoBoiler) {
 	// TODO Auto-generated constructor stub
-//	AddSequential(new ElevatorInitialize());
+	AddParallel(new ElevatorInitialize());
 
 	switch (loc) {
 	case kCenterPegRed:
-		AddSequential(new frc::PrintCommand("Center Peg\n"));
 		AddSequential(
 				new AutonomousBlendedMove(&AutoMove_RS2_to_RP2_L,
 						&AutoMove_RS2_to_RP2_R, t_auto_end_RS2_to_RP2,
 						&VisionProcessing::e_Gear_x));
 		break;
 	case kLeftPegRed:
-		AddSequential(new frc::PrintCommand("Left Peg\n"));
 		AddSequential(
 				new AutonomousBlendedMove(&AutoMove_RS1_to_RP1_L,
 						&AutoMove_RS1_to_RP1_R, t_auto_end_RS1_to_RP1,
 						&VisionProcessing::e_Gear_x));
 		break;
 	case kRightPegRed:
-		AddSequential(new frc::PrintCommand("Right Peg\n"));
 		AddSequential(
 						new AutonomousBlendedMove(&AutoMove_RS3_to_RP3_L,
 								&AutoMove_RS3_to_RP3_R, t_auto_end_RS3_to_RP3,
@@ -108,6 +106,9 @@ AutonomousGearGroup::AutonomousGearGroup(PegLocation loc, bool GotoBoiler) {
 			break;
 		}
 		AddSequential(new AutonomousLowBoiler());
+		AddSequential(
+				new AutonomousMotionProfile(&AutoMove_BB_to_F_L,
+						&AutoMove_BB_to_F_R));
 	}
 	else {
 		AddSequential(new AutonomousMotionProfile(&MoveOffPeg));
