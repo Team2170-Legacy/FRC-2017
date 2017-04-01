@@ -214,12 +214,7 @@ void Payload::ZeroElevatorPosition() {
 }
 
 double Payload::GetElevatorPosition() {
-	if (Preferences::GetInstance()->GetBoolean("NoElevator", false)) {
-		return 0.0;
-	}
-	else {
 		return cANTalonElevator->GetPosition();
-	}
 }
 // Put methods for controlling this
 // here. Call these from Commands.

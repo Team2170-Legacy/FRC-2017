@@ -23,7 +23,7 @@ AutonomousLowBoiler::AutonomousLowBoiler() {
 
 	// Dump balls into low boiler
 	double ElevatorPos = Preferences::GetInstance()->GetDouble(
-			"ElevatorLowBoiler", 1000.0);
+			"ElevatorLowBoiler", 2.3);
 
 	AddSequential(new ElevatorPosition(ElevatorPos));
 	AddSequential(new IntakeReverse());
