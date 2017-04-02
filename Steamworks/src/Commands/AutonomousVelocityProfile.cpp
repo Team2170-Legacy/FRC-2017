@@ -81,7 +81,8 @@ AutonomousVelocityProfile::AutonomousVelocityProfile(
 }
 
 unsigned int AutonomousVelocityProfile::GetVelocityOffset(void) {
-	double MoveTime = mTime + VelocityTimer.Get();
+//	double MoveTime = mTime + VelocityTimer.Get();
+	double MoveTime = mTime + Robot::BlendTimer->Get();
 
 	return ((unsigned int)(MoveTime / (mLeftWheel->at(0).at(2) / 1000)));
 }

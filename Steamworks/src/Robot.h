@@ -69,7 +69,7 @@ public:
 	bool isVisionEnabled() const {
 		return mVisionEnabled;
 	}
-
+	static std::shared_ptr<frc::Timer> BlendTimer;
 	frc::SendableChooser<frc::Command*> chooser;
 };
 #endif

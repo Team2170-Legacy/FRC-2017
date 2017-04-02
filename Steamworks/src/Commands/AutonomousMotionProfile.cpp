@@ -75,6 +75,9 @@ void AutonomousMotionProfile::End() {
 	}
 	else {
 		printf("Blended End - Set to %f RPM\n", mLeftEndVelocity);
+		Robot::BlendTimer->Stop();
+		Robot::BlendTimer->Reset();
+		Robot::BlendTimer->Start();
 		Robot::driveTrain->SetMotionProfileState(
 				CANTalon::SetValueMotionProfile::SetValueMotionProfileDisable);
 		Robot::driveTrain->SetChassisMode(CANTalon::TalonControlMode::kSpeedMode);
