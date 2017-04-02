@@ -1,7 +1,7 @@
 #include "AutonomousLowBoiler.h"
 #include "ElevatorPosition.h"
-#include "IntakeReverse.h"
-#include "IntakeOff.h"
+#include "DumperOn.h"
+#include "DumperOff.h"
 
 AutonomousLowBoiler::AutonomousLowBoiler() {
 	// Add Commands here:
@@ -26,7 +26,7 @@ AutonomousLowBoiler::AutonomousLowBoiler() {
 			"ElevatorLowBoiler", 2.3);
 
 	AddSequential(new ElevatorPosition(ElevatorPos));
-	AddSequential(new IntakeReverse());
+	AddSequential(new DumperOn());
 	AddSequential(new frc::WaitCommand(2.0));
-	AddSequential(new IntakeOff());
+	AddSequential(new DumperOff());
 }

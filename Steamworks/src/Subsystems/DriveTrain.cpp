@@ -72,14 +72,14 @@ void DriveTrain::ArcadeDriveWithJoysticks(double moveVal, double rotateVal) {
 }
 
 void DriveTrain::ResetChassisYaw() {
-	if (gyro->IsConnected()) {
-		gyro->Reset();
-	}
+//	if (gyro->IsConnected()) {
+//		gyro->Reset();
+//	}
 }
 
 double DriveTrain::ReadChassisYaw() {
 	double result = 0.0;
-	result = gyro->GetAngle();
+//	result = gyro->GetAngle();
 
 	return result;
 }
@@ -515,8 +515,8 @@ void DriveTrain::TankDrive(float Left, float Right) {
 		SetChassisMode(CANTalon::TalonControlMode::kThrottleMode);
 	}
 
-	Left = MapStick(Left);
-	Right = MapStick(Right);
+	Left = DEADBAND(Left, 0.07);
+	Right = DEADBAND(Right, 0.07);
 
 	if (kDriveVelocityMode) {
 		Left *= kDriveMaxVelocity;
