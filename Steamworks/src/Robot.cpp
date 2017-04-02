@@ -111,6 +111,7 @@ void Robot::AutonomousInit() {
 
 void Robot::AutonomousPeriodic() {
 	Scheduler::GetInstance()->Run();
+	UpdateSmartDash();
 }
 
 void Robot::TeleopInit() {
