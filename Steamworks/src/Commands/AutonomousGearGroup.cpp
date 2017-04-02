@@ -78,7 +78,7 @@ AutonomousGearGroup::AutonomousGearGroup(PegLocation loc, bool GotoBoiler) {
 			AddSequential(
 					new AutonomousMotionProfile(&AutoMove_RP2_to_RB_L,
 							&AutoMove_RP2_to_RB_R));
-			AddParallel(new BackDoorClose());
+			AddSequential(new BackDoorClose());
 			AddSequential(new AutonomousLowBoiler());
 			AddSequential(
 					new AutonomousMotionProfile(&AutoMove_RB_to_F_L,
@@ -88,7 +88,7 @@ AutonomousGearGroup::AutonomousGearGroup(PegLocation loc, bool GotoBoiler) {
 			AddSequential(
 					new AutonomousMotionProfile(&AutoMove_RP1_to_RB_L,
 							&AutoMove_RP1_to_RB_R));
-			AddParallel(new BackDoorClose());
+			AddSequential(new BackDoorClose());
 			AddSequential(new AutonomousLowBoiler());
 			AddSequential(
 					new AutonomousMotionProfile(&AutoMove_RB_to_F_L,
@@ -98,7 +98,7 @@ AutonomousGearGroup::AutonomousGearGroup(PegLocation loc, bool GotoBoiler) {
 			AddSequential(
 					new AutonomousMotionProfile(&AutoMove_RP3_to_RB_L,
 							&AutoMove_RP3_to_RB_R));
-			AddParallel(new BackDoorClose());
+			AddSequential(new BackDoorClose());
 			AddSequential(new AutonomousLowBoiler());
 			AddSequential(
 					new AutonomousMotionProfile(&AutoMove_RB_to_F_L,
@@ -108,7 +108,7 @@ AutonomousGearGroup::AutonomousGearGroup(PegLocation loc, bool GotoBoiler) {
 			AddSequential(
 					new AutonomousMotionProfile(&AutoMove_BP2_to_BB_L,
 							&AutoMove_BP2_to_BB_R));
-			AddParallel(new BackDoorClose());
+			AddSequential(new BackDoorClose());
 			AddSequential(new AutonomousLowBoiler());
 			AddSequential(
 					new AutonomousMotionProfile(&AutoMove_BB_to_F_L,
@@ -118,7 +118,7 @@ AutonomousGearGroup::AutonomousGearGroup(PegLocation loc, bool GotoBoiler) {
 			AddSequential(
 					new AutonomousMotionProfile(&AutoMove_BP1_to_BB_L,
 							&AutoMove_BP1_to_BB_R));
-			AddParallel(new BackDoorClose());
+			AddSequential(new BackDoorClose());
 			AddSequential(new AutonomousLowBoiler());
 			AddSequential(
 					new AutonomousMotionProfile(&AutoMove_BB_to_F_L,
@@ -128,7 +128,7 @@ AutonomousGearGroup::AutonomousGearGroup(PegLocation loc, bool GotoBoiler) {
 			AddSequential(
 					new AutonomousMotionProfile(&AutoMove_BP3_to_BB_L,
 							&AutoMove_BP3_to_BB_R));
-			AddParallel(new BackDoorClose());
+			AddSequential(new BackDoorClose());
 			AddSequential(new AutonomousLowBoiler());
 			AddSequential(
 					new AutonomousMotionProfile(&AutoMove_BB_to_F_L,

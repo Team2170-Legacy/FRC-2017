@@ -40,10 +40,6 @@ void Robot::RobotInit() {
 	mVisionEnabled =
 			Preferences::GetInstance()->GetBoolean("VisionEnabled", false);
 
-	if (mVisionEnabled) {
-		// driver station camera
-		CameraServer::GetInstance()->StartAutomaticCapture();
-	}
 	std::thread visionThread(VisionProcessing::VisionThread);
 	visionThread.detach();
 

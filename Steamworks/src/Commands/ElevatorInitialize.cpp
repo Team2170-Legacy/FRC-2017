@@ -34,6 +34,7 @@ ElevatorInitialize::ElevatorInitialize() {
 	// e.g. if Command1 requires chassis, and Command2 requires arm,
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
+	AddParallel(new BackDoorClose());
 	AddSequential(new ZeroElevatorEncoder());
 	AddSequential(new ElevatorHome());
 	AddSequential(new WaitCommand(0.1));
@@ -41,5 +42,4 @@ ElevatorInitialize::ElevatorInitialize() {
 	AddSequential(new ElevatorOffHome());
 	AddSequential(new WaitCommand(0.1));
 	AddSequential(new ZeroElevatorEncoder());
-	AddSequential(new BackDoorClose());
 }

@@ -127,6 +127,7 @@ void Payload::InitPayload() {
 	SetElevatorMode(LoopMode::kOpenLoop);
 	cANTalonElevator->SelectProfileSlot(0);
 	cANTalonElevator->Set(0);
+	SetBackDoorPosition(Payload::DoorPosition::kDoorClosed);
 
 }
 

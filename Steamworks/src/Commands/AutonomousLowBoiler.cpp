@@ -25,7 +25,7 @@ AutonomousLowBoiler::AutonomousLowBoiler() {
 	double ElevatorPos = Preferences::GetInstance()->GetDouble(
 			"ElevatorLowBoiler", 2.3);
 
-	AddSequential(new ElevatorPosition(ElevatorPos));
+	AddParallel(new ElevatorPosition(ElevatorPos));
 	AddSequential(new DumperOn());
 	AddSequential(new frc::WaitCommand(2.0));
 	AddSequential(new DumperOff());
